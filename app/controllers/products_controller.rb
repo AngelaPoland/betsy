@@ -16,4 +16,8 @@ class ProductsController < ApplicationController
 
   def update
   end
+
+  def add_to_order
+  end
+  
 end
