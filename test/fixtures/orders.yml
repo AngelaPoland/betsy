@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  billing_email: MyString
+  billing_address: MyString
+  billing_name: MyString
+  billing_num: 1
+  billing_exp: MyString
+  billing_cvv: 1
+  billing_zipcode: 1
+
+two:
+  status: MyString
+  billing_email: MyString
+  billing_address: MyString
+  billing_name: MyString
+  billing_num: 1
+  billing_exp: MyString
+  billing_cvv: 1
+  billing_zipcode: 1
