@@ -1,2 +1,21 @@
-<h1>Merchants#products_manager</h1>
-<p>Find me in app/views/merchants/products_manager.html.erb</p>
+<h2><%= @merchant.username%></h2>
+<section class="products-manager">
+  <h3>Product Management: </h3>
+
+  <ul class="product-page">
+    <li class="add_product">
+      <%=  link_to "Add a Product", new_merchant_product_path(merchant.id) %>
+    </li>
+    <li class="add_category">
+      <%=  link_to "Add a category", new_catgory(merchant.id) %>
+    </li>
+    <% @order_products.each do |order_product| %>
+    <li class="merchant-product">
+      <span class="merchant-product-id">
+        <%=  link_to product.name, product_path(product.order_id), class: 'product-link' %>
+      </span>
+    </li>
+    <% end %>
+  </ul>
+
+</section>
