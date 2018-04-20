@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   has_many :order_products
-  has_and_belongs_to_many :catergories
+  has_and_belongs_to_many :categories
   has_many :reviews
   belongs_to :merchant
 
