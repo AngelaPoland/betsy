@@ -1,31 +1,31 @@
 Rails.application.routes.draw do
-  get 'order_products/edit'
 
-  get 'order_products/update'
+  root 'homepages#index'
 
-  get 'sessions/login'
+  resources :merchants do
+    resources :products, only: [:index, :new, :create, :edit, :update]
+  end
 
-  get 'sessions/logout'
+  get '/merchant/account_page', to: 'merchants#account_page', as: 'account_page_path'
 
-  get 'homepages/index'
+  get 'merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
 
-  get 'merchants/account_page'
+  get 'merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
 
-  get 'merchants/order_fulfillment'
+  resources :products, only: [:index, :show]
 
-  get 'merchants/products_manager'
+  get '/product/product_id/add_to_order', to: 'products#add_to_order', as: 'add_to_order'
 
-  get 'orders/show'
+  resources :orders, only: [:show, :create, :update, :destroy]
 
-  get 'orders/create'
+  get 'order/checkout', to: 'orders#checkout', as: 'checkout'
+  patch 'order/paid', to: 'orders#paid', as: 'order_paid'
 
-  get 'orders/update'
+  get '/login', to: 'sessions#login_form', as: 'login'
+  post '/login', to: 'sessions#login'
+  delete '/logout', to: 'sessions#logout', as: 'logout'
 
-  get 'orders/checkout'
-
-  get 'orders/paid'
-
-  get 'orders/destroy'
+  resources :order_products, only: [:edit, :update]
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -5,15 +5,15 @@ class OrdersController < ApplicationController
   def create
   end
 
-  def update
+  def update #when dealing with cart before checkout
   end
 
-  def checkout
+  def checkout #edit to enter billing info
   end
 
-  def paid
+  def paid #submit after checkout
   end
 
-  def destroy
+  def destroy #this clears the cart before order has gone into paid status
   end
 end
