@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout'
   patch 'orders/:id/paid', to: 'orders#paid', as: 'order_paid'
 
-  get '/login', to: 'sessions#login_form', as: 'login'
-  post '/login', to: 'sessions#login'
+  get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
+  get '/auth/github', as: 'github_login'
   delete '/logout', to: 'sessions#logout', as: 'logout'
 
   resources :order_products, only: [:edit, :update]
