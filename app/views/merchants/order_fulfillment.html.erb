@@ -1,2 +1,13 @@
-<h1>Merchants#order_fulfillment</h1>
-<p>Find me in app/views/merchants/order_fulfillment.html.erb</p>
+<h2><%= @merchant.username%></h2>
+<section class="order-fulfillment">
+  <h3>All Orders: </h3>
+  <ul class="merchant-order-list">
+    <% @order_products.each do |order_product| %>
+    <li class="merchant-order">
+      <span class="order-product-id">
+        <%=  link_to order_product.order_id, order_product_path(order_product.order_id), class: 'order-link' %>
+      </span>
+    </li>
+    <% end %>
+  </ul>
+</section>
