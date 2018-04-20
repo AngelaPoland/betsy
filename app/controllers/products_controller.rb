@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+
+  def root
+  end
+  
   def index
   end
 
@@ -19,5 +23,5 @@ class ProductsController < ApplicationController
 
   def add_to_order
   end
-  
+
 end

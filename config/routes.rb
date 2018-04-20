@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'homepages#index'
+  root 'products#root'
 
   resources :merchants, except: [:index, :create, :new, :edit, :update, :destroy] do
     resources :products, only: [:index, :new, :create, :edit, :update]
