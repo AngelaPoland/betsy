@@ -2,15 +2,15 @@ Rails.application.routes.draw do
 
   root 'homepages#index'
 
-  resources :merchants do
+  resources :merchants, except: [:index, :create, :new, :edit, :update, :destroy] do
     resources :products, only: [:index, :new, :create, :edit, :update]
   end
 
-  get '/merchant/account_page', to: 'merchants#account_page', as: 'account_page_path'
+  get '/merchants/:id/account_page', to: 'merchants#account_page', as: 'account_page_path'
 
-  get 'merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
+  get 'merchants/:id/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
 
-  get 'merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
+  get 'merchants/:id/products_manager', to: 'merchants#products_manager', as: 'products_manager'
 
   resources :products, only: [:index, :show]
 
@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :create, :update, :destroy]
 
-  get 'order/checkout', to: 'orders#checkout', as: 'checkout'
-  patch 'order/paid', to: 'orders#paid', as: 'order_paid'
+  get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout'
+  patch 'orders/:id/paid', to: 'orders#paid', as: 'order_paid'
 
   get '/login', to: 'sessions#login_form', as: 'login'
   post '/login', to: 'sessions#login'

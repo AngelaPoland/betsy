@@ -1,5 +1,8 @@
 class MerchantsController < ApplicationController
-  def account_page
+  def index
+  end
+
+  def account_page #show - only visible by OAuth
   end
 
   def order_fulfillment
