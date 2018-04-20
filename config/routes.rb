@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :new, :create, :edit, :update]
   end
 
-  get '/merchants/:id/account_page', to: 'merchants#account_page', as: 'account_page_path'
+  get '/merchants/:id/account_page', to: 'merchants#account_page', as: 'account_page'
 
   get 'merchants/:id/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
 
