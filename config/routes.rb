@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'categories/new'
+
+  get 'categories/create'
+
   root 'products#root'
 
   resources :merchants, except: [:index, :create, :new, :edit, :update, :destroy] do
