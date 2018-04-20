@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
           session[:merchant_id] = @merchant.id
           redirect_to root_path
         else
-          flash[:error] = "Some error happened in Merchant creation"
+          flash[:alert] = "Some error happened in Merchant creation"
           redirect_to root_path
         end
       else
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
       end
     else
-      flash[:error] = "Logging in through Github not successful"
+      flash[:alert] = "Logging in through Github not successful"
       redirect_to root_path
   end
 
