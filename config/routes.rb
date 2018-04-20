@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :new, :create, :edit, :update]
   end
 
+  resources :categories, only: [:new, :create] do
+    resources :products, only: [:index]
+  end
+
   get '/merchants/:id/account_page', to: 'merchants#account_page', as: 'account_page'
 
   get 'merchants/:id/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
