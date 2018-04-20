@@ -1,2 +1,6 @@
-<h1>Categories#new</h1>
-<p>Find me in app/views/categories/new.html.erb</p>
+<h1>Add a Category</h1>
+<%= form_for @category do |f| %>
+  <%= f.label :category_name, 'Category' %>
+  <%= f.text_field :category_name %>
+  <%= f.submit %>
+<% end %>
