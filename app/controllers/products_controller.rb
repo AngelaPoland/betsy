@@ -54,6 +54,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find_by(id: params[:id])
     if @product.update(product_params)
+    end
   end
 
   def add_to_order

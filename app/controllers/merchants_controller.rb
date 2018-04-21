@@ -18,6 +18,8 @@ class MerchantsController < ApplicationController
   def products_manager
     if !@current_merchant
       flash[:alert] = "You do not have access to this Merchant's product management"
+    else
+      @products = @current_merchant.products
     end
   end
 
