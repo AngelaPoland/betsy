@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.merchant = Merchant.find_by(id: params[:merchant_id])
+    @product.product_active = true
     if @product.save
       flash[:success] = "Successlfully created product!"
       redirect_to product_path(@product.id)
@@ -46,9 +47,13 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
   def update
+    @product = Product.find_by(id: params[:id])
+    if @product.update(product_params)
   end
 
   def add_to_order
