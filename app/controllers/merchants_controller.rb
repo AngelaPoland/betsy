@@ -21,7 +21,4 @@ class MerchantsController < ApplicationController
     end
   end
 
-  def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
-  end
 end
