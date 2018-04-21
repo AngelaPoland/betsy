@@ -2,5 +2,7 @@
 <%= form_for @category do |f| %>
   <%= f.label :category_name, 'Category' %>
   <%= f.text_field :category_name %>
+  <%= f.label :products, 'Add the new Category to your existing Products' %>
+  <%= f.collection_check_boxes(:product_ids, @current_merchant.products, :id, :name ) %>
   <%= f.submit %>
 <% end %>
