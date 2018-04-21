@@ -54,6 +54,12 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find_by(id: params[:id])
     if @product.update(product_params)
+      flash[:success] = "Successfully update your product, #{@product.id}"
+      redirect_to product_path(@product.id)
+    else
+      flash[:error] = @product.errors
+      render :edit
+    end
   end
 
   def add_to_order
