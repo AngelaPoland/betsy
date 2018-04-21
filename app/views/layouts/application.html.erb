@@ -16,14 +16,13 @@
   <header class="page-header">
     <nav>
       <ul>
-        <% if session[:merchant_id] %>
-        <% @current_merchant = session[:merchant_id]%>
+        <% if @current_merchant %>
         <li><%= "Welcome #{@current_merchant.username}" %></li>
         <li><h2 class="title">
           <%= link_to "Hipsty", root_path %>
         </h2></li>
-        <li><%= link_to "Account", account_page_path %> </li>
-        <li><%= link_to "Log Out", logout_path %> </li>
+        <li><%= link_to "Account", account_page_path(@current_merchant.id) %> </li>
+        <li><%= link_to "Log Out", logout_path, method: :delete %> </li>
         <li><%= link_to "Cart: Needs Path", root_path %> </li>
         <% else %>
         <li><%= "Welcome Guest" %></li>
