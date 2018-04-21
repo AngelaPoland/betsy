@@ -9,7 +9,7 @@
     <li class="add_category">
       <%=  link_to "Add a category", new_category_path %>
     </li>
-    <% @current_merchant.products.each do |product| %>
+    <% @current_merchant.products.each do | product | %>
     <li class="merchant-product">
       <span class="merchant-product-id">
         <%=  link_to product.name, product_path(product.order_id), class: 'product-link' %>

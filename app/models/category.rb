@@ -10,4 +10,5 @@ class Category < ApplicationRecord
     raise ActionController::RoutingError.new('Not Found')
   end
 
+
 end
