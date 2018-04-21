@@ -16,23 +16,22 @@
   <header class="page-header">
     <nav>
       <ul>
-        <% if session[:merchant_id] %>
-        <% @current_merchant = session[:merchant_id]%>
+        <% if @current_merchant %>
         <li><%= "Welcome #{@current_merchant.username}" %></li>
         <li><h2 class="title">
           <%= link_to "Hipsty", root_path %>
         </h2></li>
-        <li><%= link_to "Account", account_page_path %> </li>
-        <li><%= link_to "Log Out", logout_path %> </li>
-        <li><%= link_to "Cart", order_path %> </li>
+        <li><%= link_to "Account", account_page_path(@current_merchant.id) %> </li>
+        <li><%= link_to "Log Out", logout_path, method: :delete %> </li>
+        <li><%= link_to "Cart: Needs Path", root_path %> </li>
         <% else %>
         <li><%= "Welcome Guest" %></li>
         <li><h2 class="title">
           <%= link_to "Hipsty", root_path %>
         </h2></li>
-        <li><%= link_to "Log In", auth_callback_path %> </li>
-        <li><%= link_to "Become a Merchant", auth_callback_path %> </li>
-        <li><%= link_to "Cart", order_path %> </li>
+        <li><%= link_to "Log In", github_login_path %> </li>
+        <li><%= link_to "Become a Merchant", github_login_path %> </li>
+        <li><%= link_to "Cart: Path Needed", root_path %> </li>
         <% end %>
       </ul>
     </nav>
@@ -47,7 +46,7 @@
       <li>
         <a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">Shop by Category</a>
         <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-          <% @categories.each do |category| %>
+          <% Category.all.each do |category| %>
           <li><%= link_to category.category_name, category_products_path(category.id) %></li>
           <% end %>
         </ul>
@@ -55,7 +54,7 @@
       <li>
         <a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">Shop by Merhcant</a>
         <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-          <% @merchants.each do |merchant| %>
+          <% Merchant.all.each do |merchant| %>
           <li><%= link_to merchant.username, merchant_products_path(merchant.id) %></li>
           <% end %>
         </ul>
@@ -67,20 +66,7 @@
 
 
 
-<!-- <% if flash[:result_text] or flash[:messages] %>
-<section class="status <%= flash[:status] %>">
-  <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
-  <% if flash[:messages] %>
-  <ul>
-    <% flash[:messages].each do |name, problems| %>
-    <% problems.each do |problem| %>
-    <li><%= name %>: <%= problem %></li>
-    <% end %>
-    <% end %>
-  </ul>
-  <% end %>
-</section>
-<% end %> -->
+
 <ul>
   <% flash.each do | name, message | %>
   <li>

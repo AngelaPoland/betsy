@@ -1,2 +1,15 @@
-<h1>Merchants#account_page</h1>
-<p>Find me in app/views/merchants/account_page.html.erb</p>
+<h2><%= @current_merchant.username%></h2>
+<section class="merchant-options">
+  <h3>Account Options: </h3>
+  <ul class="account-page">
+    <li class="manage-products">
+      <%=  link_to "Manage Products", products_manager_path %>
+    </li>
+    <li class="order-fulfillment">
+      <%=  link_to "All Orders", order_fulfillment_path %>
+    </li>
+    <li class="new-category">
+      <%=  link_to "Create a Category", new_category_path  %>
+    </li>
+  </ul>
+</section>
