@@ -31,6 +31,10 @@ Rails.application.routes.draw do
 
   resources :order_products, only: [:edit, :update]
 
+  patch 'merchant/:merchant_id/products/:id/active', to: 'products#active', as: 'active'
+
+  patch 'merchant/:merchant_id/products/:id/retired', to: 'products#retire', as: 'retire'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

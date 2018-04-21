@@ -66,6 +66,18 @@ class ProductsController < ApplicationController
   def add_to_order
   end
 
+  def active
+    @product = Product.find_by(id: params[:id])
+    @product.update_attributes(product_active: false)
+   redirect_to products_manager_path
+  end
+
+  def retire
+    @product = Product.find_by(id: params[:id])
+    @product.update_attributes(product_active: true)
+   redirect_to products_manager_path
+  end
+
   private
 
   def product_params
