@@ -1,15 +1,15 @@
-<h2><%= @merchant.username%></h2>
+<h2><%= @current_merchant.username%></h2>
 <section class="products-manager">
   <h3>Product Management: </h3>
 
   <ul class="product-page">
     <li class="add_product">
-      <%=  link_to "Add a Product", new_merchant_product_path(merchant.id) %>
+      <%=  link_to "Add a Product", new_merchant_product_path(@current_merchant.id) %>
     </li>
     <li class="add_category">
-      <%=  link_to "Add a category", new_catgory(merchant.id) %>
+      <%=  link_to "Add a category", new_category_path %>
     </li>
-    <% @order_products.each do |order_product| %>
+    <% @current_merchant.products.each do |product| %>
     <li class="merchant-product">
       <span class="merchant-product-id">
         <%=  link_to product.name, product_path(product.order_id), class: 'product-link' %>

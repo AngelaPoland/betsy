@@ -1,13 +1,15 @@
-<h2><%= @merchant.username%></h2>
+<h2><%= @current_merchant.username %></h2>
 <section class="order-fulfillment">
   <h3>All Orders: </h3>
   <ul class="merchant-order-list">
-    <% @order_products.each do |order_product| %>
-    <li class="merchant-order">
-      <span class="order-product-id">
-        <%=  link_to order_product.order_id, order_product_path(order_product.order_id), class: 'order-link' %>
-      </span>
-    </li>
+    <% @current_merchant.products.each do |product| %>
+      <%  product.order_products.each do |order_product| %> 
+        <li class="merchant-order">
+          <span class="order-product-id">
+            <%=  link_to order_product.order_id, order_product_path(order_product.order_id), class: 'order-link' %>
+          </span>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </section>
