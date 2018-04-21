@@ -8,8 +8,4 @@ class Product < ApplicationRecord
   validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0, less_than: 1000000 }
   validates_numericality_of :inventory, :only_integer => true, :greater_than_or_equal_to => 0
 
-  def build_new_product(product_args)
-    
-  end
-
 end

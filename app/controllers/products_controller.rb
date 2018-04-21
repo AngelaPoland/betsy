@@ -30,11 +30,19 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
   def create
-    @product = Product.new
-    
+    @product = Product.new(product_params)
+    @product.merchant = Merchant.find_by(id: params[:merchant_id])
+    if @product.save
+      flash[:success] = "Successlfully created product!"
+      redirect_to product_path(@product.id)
+    else
+      flash.now[:error] = @product.errors
+      render :new
+    end
   end
 
   def edit
@@ -44,6 +52,12 @@ class ProductsController < ApplicationController
   end
 
   def add_to_order
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :price, :inventory, :photo_url, :description, categories: [])
   end
 
 end

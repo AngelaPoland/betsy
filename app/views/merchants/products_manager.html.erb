@@ -12,7 +12,12 @@
     <% @current_merchant.products.each do | product | %>
     <li class="merchant-product">
       <span class="merchant-product-id">
-        <%=  link_to product.name, product_path(product.order_id), class: 'product-link' %>
+        <%=  link_to product.name, product_path(product.id), class: 'product-link' %>
+      </span>
+    </li>
+    <li class="merchant-product">
+      <span class="merchant-product-id">
+        <%=  link_to 'edit', edit_merchant_product_path(@current_merchant.id, product.id), class: 'product-link' %>
       </span>
     </li>
     <% end %>
