@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
     else
       flash[:alert] = "Logging in through Github not successful"
       redirect_to root_path
+    end
   end
 
   def logout
