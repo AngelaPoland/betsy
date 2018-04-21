@@ -12,11 +12,12 @@ class CategoriesController < ApplicationController
         # needs a different path when we are further along
         redirect_to products_path
       else
-        flash[:error] = @category.errors
+        flash.now[:error] = @category.errors
         render :new
       end
     else
       flash[:alert] = "You need to be logged in to create a category."
+      redirect_to root_path
     end
   end
 end
