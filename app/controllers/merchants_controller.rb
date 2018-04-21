@@ -1,4 +1,5 @@
 class MerchantsController < ApplicationController
+
   def index
   end
 
@@ -18,5 +19,9 @@ class MerchantsController < ApplicationController
     if !@current_merchant
       flash[:alert] = "You do not have access to this Merchant's product management"
     end
+  end
+
+  def current_merchant
+    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 end
