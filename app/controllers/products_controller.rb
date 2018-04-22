@@ -18,8 +18,8 @@ class ProductsController < ApplicationController
       else
         @products = Product.includes(:merchant).where(product_active: true, products: {merchant_id: params[:merchant_id]})
       end
-    # elsif params[:search]
-    #     @products = Product.search(params[:search]).order(:name)
+      # elsif params[:search]
+      #     @products = Product.search(params[:search]).order(:name)
     else
       @products = Product.where(product_active: true).order(:id)
     end
@@ -89,16 +89,11 @@ class ProductsController < ApplicationController
     end
   end
 
-  def active
+  def status
+    status = params[:status]
     @product = Product.find_by(id: params[:id])
-    @product.update_attributes(product_active: false)
-   redirect_to products_manager_path
-  end
-
-  def retire
-    @product = Product.find_by(id: params[:id])
-    @product.update_attributes(product_active: true)
-   redirect_to products_manager_path
+    @product.update_attributes(product_active: status)
+    redirect_to products_manager_path
   end
 
   private

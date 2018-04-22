@@ -33,9 +33,9 @@
         <td><%= product.product_active == true ? "Active" : "Retired" %></td>
         <td>
           <% if product.product_active == true %>
-          <%= link_to "Retire Product?", active_path(@current_merchant.id, product.id), method: :patch %>
+          <%= link_to "Retire Product?", status_path(@current_merchant.id, product.id, status: false), method: :patch %>
           <% else %>
-          <%= link_to "Activate Product?", retire_path(@current_merchant.id, product.id), method: :patch %>
+          <%= link_to "Activate Product?", status_path(@current_merchant.id, product.id, status: true), method: :patch %>
           <% end %>
         </td>
         <td><%= link_to 'edit', edit_merchant_product_path(@current_merchant.id, product.id), class: 'product-link' %></td>
