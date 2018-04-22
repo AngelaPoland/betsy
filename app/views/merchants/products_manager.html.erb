@@ -9,13 +9,39 @@
     <li class="add_category">
       <%=  link_to "Add a category", new_category_path %>
     </li>
-    <% @current_merchant.products.each do |product| %>
-    <li class="merchant-product">
-      <span class="merchant-product-id">
-        <%=  link_to product.name, product_path(product.order_id), class: 'product-link' %>
-      </span>
-    </li>
-    <% end %>
   </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory</th>
+        <th>Status</th>
+        <th>Change Status</th>
+        <th>Edit</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do | product | %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.inventory %></td>
+        <td><%= product.product_active == true ? "Active" : "Retired" %></td>
+        <td>
+          <% if product.product_active == true %>
+          <%= link_to "Retire Product?", active_path(@current_merchant.id, product.id), method: :patch %>
+          <% else %>
+          <%= link_to "Activate Product?", retire_path(@current_merchant.id, product.id), method: :patch %>
+          <% end %>
+        </td>
+        <td><%= link_to 'edit', edit_merchant_product_path(@current_merchant.id, product.id), class: 'product-link' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </section>

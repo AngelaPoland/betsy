@@ -1,0 +1,15 @@
+<h1><%= page_title %></h1>
+<%= form_for([@merchant, @product]) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <%= f.label :inventory %>
+  <%= f.text_field :inventory %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.label :photo_url %>
+  <%= f.text_field :photo_url %>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name ) %>
+  <%= f.submit %>
+<% end %>

@@ -29,18 +29,59 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
   def create
+    @product = Product.new(product_params)
+    @product.merchant = Merchant.find_by(id: params[:merchant_id])
+    @product.product_active = true
+    if @product.save
+      flash[:success] = "Successlfully created product!"
+      redirect_to product_path(@product.id)
+    else
+      flash.now[:error] = @product.errors
+      render :new
+    end
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
+    @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
   def update
+    @product = Product.find_by(id: params[:id])
+    if @product.update(product_params)
+
+      flash[:success] = "Successfully update your product, #{@product.id}"
+      redirect_to product_path(@product.id)
+    else
+      flash[:error] = @product.errors
+      render :edit
+    end
   end
 
   def add_to_order
+  end
+
+  def active
+    @product = Product.find_by(id: params[:id])
+    @product.update_attributes(product_active: false)
+   redirect_to products_manager_path
+  end
+
+  def retire
+    @product = Product.find_by(id: params[:id])
+    @product.update_attributes(product_active: true)
+   redirect_to products_manager_path
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :price, :inventory, :photo_url, :description, categories: [])
   end
 
 end
