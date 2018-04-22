@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
 
-  get '/product/product_id/add_to_order', to: 'products#add_to_order', as: 'add_to_order'
+  get '/product/:id/add_to_order', to: 'products#add_to_order', as: 'add_to_order'
 
   resources :orders, only: [:show, :create, :update, :destroy]
 
