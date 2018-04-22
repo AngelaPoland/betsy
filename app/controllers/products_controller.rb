@@ -64,26 +64,36 @@ class ProductsController < ApplicationController
   end
 
   def add_to_order
-    if @current_cart
-      product = Product.find_by(id: params[:id])
-      @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: 1, status: 'pending')
-      if @order_product.save
-        flash[:success] = "Successfully added product to cart"
-        redirect_to order_path(@current_cart.id)
-      else
-        flash[:alert] = "Failed to add to cart"
-        render :show
-      end
+    product = Product.find_by(id: params[:id])
+    if product.nil?
+      flash[:alert] = "That product does not exist"
+      redirect_to products_path
+    elsif product.product_active == false
+      flash[:alert] = "That product is currently retired"
+      redirect_to products_path
+    elsif product.inventory < 1
+      flash[:alert] = "That product is out of stock."
+      redirect_to products_path
     else
-      session[:order_id] = Order.create.id
-      product = Product.find_by(id: params[:id])
-      @order_product = OrderProduct.new(order_id: session[:order_id], product_id: product.id, quantity: 1, status: 'pending')
-      if @order_product.save
-        flash[:success] = "Successfully added product to cart"
-        redirect_to order_path(session[:order_id])
+      if @current_cart
+        @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: 1, status: 'pending')
+        if @order_product.save
+          flash[:success] = "Successfully added product to cart"
+          redirect_to order_path(@current_cart.id)
+        else
+          flash[:alert] = "Failed to add to cart"
+          render :show
+        end
       else
-        flash[:alert] = "Failed to add to cart"
-        render :show
+        session[:order_id] = Order.create.id
+        @order_product = OrderProduct.new(order_id: session[:order_id], product_id: product.id, quantity: 1, status: 'pending')
+        if @order_product.save
+          flash[:success] = "Successfully added product to cart"
+          redirect_to order_path(session[:order_id])
+        else
+          flash[:alert] = "Failed to add to cart"
+          render :show
+        end
       end
     end
   end
