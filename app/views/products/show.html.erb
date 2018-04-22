@@ -17,3 +17,7 @@
     <%= f.submit "Add to Cart", class: "button" %>
     <% end %>
   </section>
+
+  <section>
+    <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+  </section>
