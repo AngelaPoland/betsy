@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-    def format_price
-      sprintf('%.2f', (self.price))
-    end
+  def format_price(price)
+    sprintf('%.2f', price)
+  end
 
 end

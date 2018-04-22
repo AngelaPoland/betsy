@@ -19,7 +19,7 @@
             <article>
               <img src= "<%= p.photo_url %>" alt="product image">
               <p><%= p.name.capitalize %></p>
-              <p>$<%= p.format_price %></p>
+              <p>$<%= format_price(p.price) %></p>
             </article>
           <% end %>
         <% end %>
