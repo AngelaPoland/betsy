@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
 
+  resources :products, only: [:show] do
+    resources :reviews, only: [:new]
+  end
+
   get '/product/product_id/add_to_order', to: 'products#add_to_order', as: 'add_to_order'
 
   resources :orders, only: [:show, :create, :update, :destroy]
