@@ -1,2 +1,19 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+
+<section class="row product">
+  <h3> Product: <%= @product.name %> </h3>
+
+  <img src= "<%= @product.photo_url %>" alt="product-image">
+  <p>Merchant: <%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
+  <p>Description: <%=@product.description %></p>
+  <p>Cost: $<%= format_price(@product.price) %></p>
+  <p><%= @product.inventory %> in stock</p>
+  <p>Categories: <% @product.categories.each do |c| %> <%= link_to c.category_name, category_products_path(c.id)  %>
+    <% end %></p>
+    <p>Quantity:</p>
+    <%= form_for :order_products, url: order_product_path, method: :post do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.select(:inventory, (1..@product.inventory)) %>
+
+    <%= f.submit "Add to Cart", class: "button" %>
+    <% end %>
+  </section>
