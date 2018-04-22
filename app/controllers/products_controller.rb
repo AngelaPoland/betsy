@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     if @product.update(product_params)
 
-      flash[:success] = "Successfully update your product, #{@product.id}"
+      flash[:success] = "Successfully updated your product:  #{@product.name}"
       redirect_to product_path(@product.id)
     else
       flash[:error] = @product.errors
