@@ -17,3 +17,8 @@
  *= require foundation_and_overrides
 
  */
+
+.page-header li {
+  display: inline;
+  padding-right: 10px;
+}

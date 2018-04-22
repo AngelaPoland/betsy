@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
     @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
+  def render_404
+    # DPR: this will actually render a 404 page in production
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
 end

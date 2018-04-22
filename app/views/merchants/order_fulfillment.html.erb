@@ -1,15 +1,36 @@
 <h2><%= @current_merchant.username %></h2>
 <section class="order-fulfillment">
   <h3>All Orders: </h3>
-  <ul class="merchant-order-list">
-    <% @current_merchant.products.each do |product| %>
-      <%  product.order_products.each do |order_product| %> 
-        <li class="merchant-order">
-          <span class="order-product-id">
-            <%=  link_to order_product.order_id, order_product_path(order_product.order_id), class: 'order-link' %>
-          </span>
-        </li>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Purchase Date</th>
+        <th>Total</th>
+        <th>Order Status</th>
+        <th>Options</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @order_products.each do | order_product | %>
+      <tr>
+        <td>
+          <%=  link_to order_product.order_id, order_path(order_product.order_id), class: 'order-link' %>
+        </td>
+        <td><%= order_product.order.created_at %></td>
+        <td><%= "NEED TOTAL METHOD" %></td>
+        <td><%= "NEED TO PUT ORDER STATUS" %></td>
+        <td>
+          <%= link_to "NEED SHIP PATH"  %>
+          <%= link_to "NEED CANCEL PATH" %>
+        </td>
+      </tr>
       <% end %>
-    <% end %>
-  </ul>
+    </tbody>
+  </table>
+
+
 </section>
