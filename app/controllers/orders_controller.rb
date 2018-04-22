@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def paid #submit after checkout
+    
   end
 
   def destroy #this clears the cart before order has gone into paid status
