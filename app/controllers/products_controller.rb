@@ -69,6 +69,9 @@ class ProductsController < ApplicationController
     if product.nil?
       flash[:alert] = "That product does not exist"
       redirect_to products_path
+    elsif product.merchant == @current_merchant
+      flash[:alert] = "This is your product"
+      redirect_to products_path
     elsif product.product_active == false
       flash[:alert] = "That product is currently retired"
       redirect_to products_path
