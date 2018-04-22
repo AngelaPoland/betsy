@@ -1,2 +1,13 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<h1>Add a Review</h1>
+<%= form_for @review, url: product_reviews_path(params[:product_id]) do |f| %>
+
+  <strong>Product:</strong> <%= @review.product.name %>
+
+  <%= f.label :rating, "Rate this product" %>
+  <%= f.select :rating, (1..5).to_a, :include_blank => true %>
+
+  <%= f.label :description, "Review" %>
+  <%= f.text_area :description, placeholder: "Write your review here. What did you like the most? What did you like the least?" %>
+
+  <%= f.submit "Submit Review", class: "button" %>
+<% end %>
