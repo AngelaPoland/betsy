@@ -102,8 +102,8 @@ class ProductsController < ApplicationController
     end
   end
 
-  def status
-    status = params[:status]
+  def product_status
+    status = params[:product_active]
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(product_active: status)
     redirect_to products_manager_path

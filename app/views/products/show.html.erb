@@ -19,5 +19,30 @@
   </section>
 
   <section>
+    <h4>Reviews</h4>
+    <p>
+      Average rating:
+      <% if @product.reviews.count == 0 %>
+        <i>
+          No Reviews Yet
+        </i>
+        <%else%>
+      <%= @product.average_rating %>
+      <%end%>
+    </p>
+
+  </p>
+  <ul>
+    <% @product.reviews.each do |r| %>
+    <p>
+      <li> Rating: <%= r.rating %> </li>
+      <li>
+        <%= r.description %> </li>
+      </p>
+      <% end %>
+    </ul>
+  </section>
+
+  <section>
     <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
   </section>
