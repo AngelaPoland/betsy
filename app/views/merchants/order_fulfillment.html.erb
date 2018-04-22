@@ -18,7 +18,7 @@
       <% @order_products.each do | order_product | %>
       <tr>
         <td>
-          <%=  link_to order_product.order_id, order_product_path(order_product.order_id), class: 'order-link' %>
+          <%=  link_to order_product.order_id, order_path(order_product.order_id), class: 'order-link' %>
         </td>
         <td><%= order_product.order.created_at %></td>
         <td><%= "NEED TOTAL METHOD" %></td>
