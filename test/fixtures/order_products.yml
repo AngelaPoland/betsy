@@ -1,25 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 order_01:
+  order: order_one
+  product: kombucha
   quantity: 1
-  status: paid
+  status:
 
 order_02:
+  order: order_two
+  product: kombucha
   quantity: 2
   status: shipped
 
 order_03:
+  order: order_three
+  product: kombucha
   quantity: 3
   status: cancelled
 
 order_04:
+  order: order_four
+  product: kombucha
   quantity: 4
   status: paid
 
 order_05:
-  quantity: 5
-  status: shipped
-
-order_06:
+  order: order_one
+  product: kombucha
   quantity: 6
-  status: cancelled
+  status:
