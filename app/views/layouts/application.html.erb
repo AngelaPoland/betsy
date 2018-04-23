@@ -31,7 +31,14 @@
         </h2></li>
         <li><%= link_to "Log In", github_login_path %> </li>
         <li><%= link_to "Become a Merchant", github_login_path %> </li>
-        <li><%= link_to "Cart: Path Needed", root_path %> </li>
+        <li>
+          <% if @current_cart.nil? %>
+            Cart Empty
+          <% else %>
+            <% count = @current_cart.order_products.count %>
+            <%= link_to "Cart(#{count})", order_path(@current_cart.id) %>
+          <% end %>
+        </li>
         <% end %>
       </ul>
     </nav>
