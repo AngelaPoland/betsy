@@ -1,15 +1,64 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  price: 1
-  product_active: false
-  inventory: 1
-  photo_url: MyString
+kombucha:
+  name: kombucha
+  price: 39
+  description: Subway tile hexagon letterpress austin cloud bread helvetica.
+  product_active: true
+  inventory: 31
+  merchant:
+  photo_url: https://picsum.photos/200/?random
 
-two:
-  name: MyString
-  price: 1
-  product_active: false
-  inventory: 1
-  photo_url: MyString
+sage:
+  name: sage
+  price: 43
+  description: Mustache paleo sustainable green juice jianbing vegan plaid. Bushwick man bun poke pickled beard, williamsburg lumbersexual.
+  product_active: true
+  inventory: 15
+  merchant:
+  photo_url: https://picsum.photos/200/?random
+
+hoodie:
+  name: hoodie
+  price: 77
+  description: Artisan brooklyn plaid woke yuccie flannel truffaut copper mug irony leggings.
+  product_active: true
+  inventory: 5
+  merchant:
+  photo_url: https://picsum.photos/200/?random
+
+man bun:
+  name: man bun
+  price: 25
+  description: Chia 90's activated charcoal shabby chic twee seitan marfa vinyl tilde chambray yr cornhole street art pickled.
+  product_active: true
+  inventory: 19
+  merchant:
+  photo_url: https://picsum.photos/200/?random
+
+chemex:
+  name: chemex
+  price: 39
+  description: Migas marfa iPhone prism four dollar toast truffaut man bun messenger bag pug pop-up.
+  product_active: true
+  inventory: 43
+  merchant:
+  photo_url: https://picsum.photos/200/?random
+
+salt lamp:
+  name: salt lamp
+  price: 56
+  description: Typewriter la croix vape yr. Distillery venmo tousled, pour-over pop-up hexagon deep v green juice.
+  product_active: true
+  inventory: 16
+  merchant:
+  photo_url: https://picsum.photos/200/?random
+
+kale chips:
+  name: kale chips
+  price: 9
+  description: Beard affogato pork belly mlkshk franzen. children virus nibh, in zombies brains unknown ghost creepy.
+  product_active: true
+  inventory: 34
+  merchant:
+  photo_url: https://picsum.photos/200/?random

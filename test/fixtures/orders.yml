@@ -1,21 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  status: MyString
-  billing_email: MyString
-  billing_address: MyString
-  billing_name: MyString
-  billing_num: 1
-  billing_exp: MyString
-  billing_cvv: 1
-  billing_zipcode: 1
+order_one:
+  status: pending
+  billing_email: test@test.com
+  billing_address: 123 Street
+  billing_name: Ada Lovelace
+  billing_num: 123456789123
+  billing_exp: 12/18
+  billing_cvv: 123
+  billing_zipcode: 12345
 
-two:
-  status: MyString
-  billing_email: MyString
-  billing_address: MyString
-  billing_name: MyString
-  billing_num: 1
-  billing_exp: MyString
-  billing_cvv: 1
-  billing_zipcode: 1
+order_two:
+  status: paid
+  billing_email: alfredo@ortiz.biz
+  billing_address: 9729 Ernser Landing
+  billing_name: Emma Ghost
+  billing_num: 1234123412341234
+  billing_exp: 10/21/18
+  billing_cvv: 224
+  billing_zipcode: 70842
+
+order_three:
+  status: complete
+  billing_email: coy@purdymckenzie.co
+  billing_address: 48144 Hackett Wells
+  billing_name: Rowena Ravenclaw
+  billing_num: 987654321098
+  billing_exp: 6/18
+  billing_cvv: 333
+  billing_zipcode: 95176
+
+order_four:
+  status: paid
+  billing_email: jaqueline_cole@littel.co
+  billing_address: 5414 Swift Ramp
+  billing_name: Cuthbert Binns
+  billing_num: 567890123456
+  billing_exp: 6/18
+  billing_cvv: 640
+  billing_zipcode: 67894
