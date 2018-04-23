@@ -4,7 +4,7 @@ order_01:
   order: order_one
   product: kombucha
   quantity: 1
-  status:
+  status: pending
 
 order_02:
   order: order_two
@@ -28,4 +28,4 @@ order_05:
   order: order_one
   product: kombucha
   quantity: 6
-  status:
+  status: pending
