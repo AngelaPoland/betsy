@@ -6,7 +6,11 @@
   <p>Merchant: <%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
   <p>Description: <%=@product.description %></p>
   <p>Cost: $<%= format_price(@product.price) %></p>
+  <% if @product.inventory == 0 %>
+    <p><i>Out of Stock</i></p>
+    <%else%>
   <p><%= @product.inventory %> in stock</p>
+    <%end%>
   <p>Categories: <% @product.categories.each do |c| %> <%= link_to c.category_name, category_products_path(c.id)  %>
     <% end %></p>
     <p>Quantity:</p>
@@ -44,5 +48,7 @@
   </section>
 
   <section>
-    <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+    <% if @current_merchant != @product.merchant %>
+      <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+    <% end %>
   </section>
