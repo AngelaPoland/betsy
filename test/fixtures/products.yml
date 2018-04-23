@@ -13,7 +13,7 @@ sage:
   name: sage
   price: 43
   description: Mustache paleo sustainable green juice jianbing vegan plaid. Bushwick man bun poke pickled beard, williamsburg lumbersexual.
-  product_active: true
+  product_active: false
   inventory: 15
   merchant:
   photo_url: https://picsum.photos/200/?random
