@@ -2,13 +2,13 @@
 
 order_one:
   status: pending
-  billing_email: test@test.com
-  billing_address: 123 Street
-  billing_name: Ada Lovelace
-  billing_num: 123456789123
-  billing_exp: 12/18
-  billing_cvv: 123
-  billing_zipcode: 12345
+  billing_email:
+  billing_address:
+  billing_name:
+  billing_num:
+  billing_exp:
+  billing_cvv:
+  billing_zipcode:
 
 order_two:
   status: paid
