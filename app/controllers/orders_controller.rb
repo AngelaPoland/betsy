@@ -16,9 +16,14 @@ class OrdersController < ApplicationController
       @current_cart.order_products.each do |order_product|
         order_product.update_attributes(status: "paid")
       end
-      @current_cart.update_attributes(status: "paid")
-      flash[:success] = "Order received! Thank you for your purchase."
-      session[:order_id] = Order.create.id
+      @current_cart.status = "paid"
+      if @current_cart.save
+        flash[:success] = "Order received! Thank you for your purchase."
+        session[:order_id] = Order.create.id
+      else
+        flash.now[:error] = @current_cart.errors
+        render :checkout
+      end
     elsif @current_cart.errors.any?
       flash.now[:error] = @current_cart.errors
       render :checkout
@@ -35,6 +40,7 @@ class OrdersController < ApplicationController
 
   def billing_params
     params.require(:order).permit(
+      :billing_email,
       :billing_address,
       :billing_name,
       :billing_num,
