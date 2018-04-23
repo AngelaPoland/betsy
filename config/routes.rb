@@ -10,11 +10,11 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  get '/merchants/:id/account_page', to: 'merchants#account_page', as: 'account_page'
+  get '/merchant/account_page', to: 'merchants#account_page', as: 'account_page'
 
-  get 'merchants/:id/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
+  get '/merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
 
-  get 'merchants/:id/products_manager', to: 'merchants#products_manager', as: 'products_manager'
+  get '/merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
 
   resources :products, only: [:index, :show]
 
@@ -26,8 +26,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :create, :update, :destroy]
 
-  get 'orders/:id/checkout', to: 'orders#checkout', as: 'checkout'
-  patch 'orders/:id/paid', to: 'orders#paid', as: 'order_paid'
+  get '/orders/:id/checkout', to: 'orders#checkout', as: 'checkout'
+  patch '/orders/:id/paid', to: 'orders#paid', as: 'order_paid'
 
   get '/auth/:provider/callback', to: 'sessions#login', as: 'auth_callback'
   get '/auth/github', as: 'github_login'
@@ -35,11 +35,11 @@ Rails.application.routes.draw do
 
   resources :order_products, only: [:edit, :update]
 
-  patch 'merchant/:merchant_id/products/:id/active', to: 'products#active', as: 'active'
+  patch '/merchant/:merchant_id/products/:id/active', to: 'products#active', as: 'active'
 
-  patch 'merchant/:merchant_id/products/:id/retired', to: 'products#retire', as: 'retire'
+  patch '/merchant/:merchant_id/products/:id/retired', to: 'products#retire', as: 'retire'
 
-  patch 'merchant/:merchant_id/products/:id/status', to: 'products#product_status', as: 'product_status'
+  patch '/merchant/:merchant_id/products/:id/status', to: 'products#product_status', as: 'product_status'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
