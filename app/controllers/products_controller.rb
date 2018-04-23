@@ -27,6 +27,10 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:alert] = "That product does not exist"
+      redirect_to products_path
+    end
   end
 
   def new
@@ -77,23 +81,29 @@ class ProductsController < ApplicationController
       redirect_to products_path
     elsif product.inventory < 1
       flash[:alert] = "That product is out of stock."
-      redirect_to products_path
+      render :show
     else
       if @current_cart
-        @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: 1, status: 'pending')
+        @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: params[:order_products][:inventory], status: 'pending')
         if @order_product.save
+          product.inventory -= params[:order_products][:inventory].to_i
+          product.save
           flash[:success] = "Successfully added product to cart"
-          redirect_to order_path(@current_cart.id)
+          redirect_to product_path(product.id)
+          # redirect_to order_path(@current_cart.id)
         else
           flash[:alert] = "Failed to add to cart"
           render :show
         end
       else
         session[:order_id] = Order.create.id
-        @order_product = OrderProduct.new(order_id: session[:order_id], product_id: product.id, quantity: 1, status: 'pending')
+        @order_product = OrderProduct.new(order_id: session[:order_id], product_id: product.id, quantity: params[:order_products][:inventory], status: 'pending')
         if @order_product.save
+          product.inventory -= params[:order_products][:inventory].to_i
+          product.save
           flash[:success] = "Successfully added product to cart"
-          redirect_to order_path(session[:order_id])
+          redirect_to product_path(product.id)
+          # redirect_to order_path(session[:order_id])
         else
           flash[:alert] = "Failed to add to cart"
           render :show
