@@ -6,7 +6,7 @@ kombucha:
   description: Subway tile hexagon letterpress austin cloud bread helvetica.
   product_active: true
   inventory: 31
-  merchant:
+  merchant: mads
   photo_url: https://picsum.photos/200/?random
 
 sage:
@@ -15,7 +15,7 @@ sage:
   description: Mustache paleo sustainable green juice jianbing vegan plaid. Bushwick man bun poke pickled beard, williamsburg lumbersexual.
   product_active: false
   inventory: 15
-  merchant:
+  merchant: ange
   photo_url: https://picsum.photos/200/?random
 
 hoodie:
@@ -24,7 +24,7 @@ hoodie:
   description: Artisan brooklyn plaid woke yuccie flannel truffaut copper mug irony leggings.
   product_active: true
   inventory: 5
-  merchant:
+  merchant: nora
   photo_url: https://picsum.photos/200/?random
 
 man bun:
@@ -33,7 +33,7 @@ man bun:
   description: Chia 90's activated charcoal shabby chic twee seitan marfa vinyl tilde chambray yr cornhole street art pickled.
   product_active: true
   inventory: 19
-  merchant:
+  merchant: nora
   photo_url: https://picsum.photos/200/?random
 
 chemex:
@@ -42,7 +42,7 @@ chemex:
   description: Migas marfa iPhone prism four dollar toast truffaut man bun messenger bag pug pop-up.
   product_active: true
   inventory: 43
-  merchant:
+  merchant: kat
   photo_url: https://picsum.photos/200/?random
 
 salt lamp:
@@ -51,7 +51,7 @@ salt lamp:
   description: Typewriter la croix vape yr. Distillery venmo tousled, pour-over pop-up hexagon deep v green juice.
   product_active: true
   inventory: 16
-  merchant:
+  merchant: user
   photo_url: https://picsum.photos/200/?random
 
 kale chips:
@@ -60,5 +60,5 @@ kale chips:
   description: Beard affogato pork belly mlkshk franzen. children virus nibh, in zombies brains unknown ghost creepy.
   product_active: true
   inventory: 34
-  merchant:
+  merchant: user
   photo_url: https://picsum.photos/200/?random
