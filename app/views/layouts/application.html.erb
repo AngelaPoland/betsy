@@ -32,12 +32,8 @@
         <li><%= link_to "Become a Merchant", github_login_path %> </li>
         <% end %>
         <li>
-          <% if @current_cart.nil? %>
-            Cart Empty
-          <% else %>
-            <% count = @current_cart.order_products.count %>
-            <%= link_to "Cart(#{count})", order_path(@current_cart.id) %>
-          <% end %>
+          <% count = Order.find_by(id: session[:order_id]).order_products.count %>
+          <%= link_to "Cart(#{count})", order_path(@current_cart.id) %>
         </li>
       </ul>
     </nav>
