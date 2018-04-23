@@ -1,7 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  category_name: MyString
-
-two:
-  category_name: MyString
+clothes:
+  category_name: Clothing
+extra:
+  category_name: So Extra
+home:
+  category_name: Home
+food:
+  category_name: food
+beverage:
+  category_name: Beverage
+kitchen:
+  category_name: Kitchen
+spiritual:
+  category_name: Spiritual AF
+heard:
+  category_name: You probably haven't heard of it
+health:
+  category_name: Health
