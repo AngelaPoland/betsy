@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
-    @current_cart ||= Order.find(session[:order_id]) if session[:order_id]
+    if session[:order_id]
+      @current_cart = Order.find(session[:order_id])
+    else
+      @current_cart = Order.create
+      session[:order_id] = @current_cart.id
+    end
   end
 
   def render_404

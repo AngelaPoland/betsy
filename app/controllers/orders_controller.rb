@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       end
       @current_cart.update_attributes(status: "paid")
       flash[:success] = "Order received! Thank you for your purchase."
-      session[:order_id] = nil
+      session[:order_id] = Order.create.id
     elsif @current_cart.errors.any?
       flash.now[:error] = @current_cart.errors
       render :checkout
