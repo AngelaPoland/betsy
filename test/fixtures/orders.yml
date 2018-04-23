@@ -39,3 +39,13 @@ order_four:
   billing_exp: 6/18
   billing_cvv: 640
   billing_zipcode: 67894
+
+order_five:
+  status: pending
+  billing_email:
+  billing_address:
+  billing_name:
+  billing_num:
+  billing_exp:
+  billing_cvv:
+  billing_zipcode:
