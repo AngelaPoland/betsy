@@ -1,2 +1,27 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<h1>Your Cart</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Edit Quantity</th>
+      <th>Subtotal</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @current_cart.order_products.each do | order_product | %>
+    <tr>
+      <td><%= order_product.product.name %></td>
+      <td><%= order_product.product.price %></td>
+      <td><%= order_product.quantity %></td>
+      <td><%= link_to "ADD QUANTITY DROPDOWN"%></td>
+      <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
+      <td><%= link_to 'DELETE ORDERPRODUCT' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
