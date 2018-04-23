@@ -23,7 +23,6 @@
         </h2></li>
         <li><%= link_to "Account", account_page_path(@current_merchant.id) %> </li>
         <li><%= link_to "Log Out", logout_path, method: :delete %> </li>
-        <li><%= link_to "Cart: Needs Path", root_path %> </li>
         <% else %>
         <li><%= "Welcome Guest" %></li>
         <li><h2 class="title">
@@ -31,6 +30,7 @@
         </h2></li>
         <li><%= link_to "Log In", github_login_path %> </li>
         <li><%= link_to "Become a Merchant", github_login_path %> </li>
+        <% end %>
         <li>
           <% if @current_cart.nil? %>
             Cart Empty
@@ -39,7 +39,6 @@
             <%= link_to "Cart(#{count})", order_path(@current_cart.id) %>
           <% end %>
         </li>
-        <% end %>
       </ul>
     </nav>
   </header>
