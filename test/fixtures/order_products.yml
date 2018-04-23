@@ -1,9 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+order_01:
   quantity: 1
-  status: MyString
+  status: paid
 
-two:
-  quantity: 1
-  status: MyString
+order_02:
+  quantity: 2
+  status: shipped
+
+order_03:
+  quantity: 3
+  status: cancelled
+
+order_04:
+  quantity: 4
+  status: paid
+
+order_05:
+  quantity: 5
+  status: shipped
+
+order_06:
+  quantity: 6
+  status: cancelled
