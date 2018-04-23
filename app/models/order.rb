@@ -6,8 +6,7 @@ class Order < ApplicationRecord
   validates :billing_name, presence: true, if: :paid?
   validates :billing_num, presence: true, length: { in: 16..16 }, if: :paid?
   validates :billing_exp, presence: true, if: :paid?
-  validates :billing_cvv, presence: true, format: { with: /^[0-9]{3,4}$/
- }, if: :paid?
+  validates :billing_cvv, presence: true, if: :paid?
   validates :billing_zipcode, presence: true, length: { in: 5..5 }, if: :paid?
 
   def paid?
