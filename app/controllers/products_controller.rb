@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @categories = Category.order(:category_name)
 
     if params[:category_id]
       if Category.find_by(id: params[:category_id]).nil?
@@ -15,7 +14,7 @@ class ProductsController < ApplicationController
         @products = Product.includes(:categories).where(product_active: true, categories: { id: params[:category_id]})
       end
     elsif params[:merchant_id]
-      if Merchant.find_by(id: params[:merchant_id]) == nil
+      if Merchant.find_by(id: params[:merchant_id]).nil?
         render_404
       else
         @products = Product.includes(:merchant).where(product_active: true, products: {merchant_id: params[:merchant_id]})
@@ -45,7 +44,7 @@ class ProductsController < ApplicationController
     @product.merchant = Merchant.find_by(id: params[:merchant_id])
     @product.product_active = true
     if @product.save
-      flash[:success] = "Successlfully created product!"
+      flash[:success] = "Successfully created product!"
       redirect_to product_path(@product.id)
     else
       flash.now[:error] = @product.errors
