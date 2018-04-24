@@ -44,6 +44,22 @@ class OrdersController < ApplicationController
   end
 
   def destroy #this clears the cart before order has gone into paid status
+    count = 0
+    orders_count = @current_cart.order_products.count
+    @current_cart.order_products.each do | order_product |
+      product = order_product.product
+      quantity = order_product.quantity
+      product.inventory += quantity
+      if product.save && order_product.destroy
+        count += 1
+      end
+    end
+    if count == orders_count
+      flash[:success] = "Successfully emptied your Cart"
+    else
+      flash[:alert] = "Unable to empty your Cart at this time"
+    end
+    redirect_to order_path(@current_cart.id)
   end
 
   private
