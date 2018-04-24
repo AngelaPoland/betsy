@@ -17,7 +17,7 @@
         <% if p.product_active %>
           <%= link_to product_path(p.id) do %>
             <article>
-              <img src= "<%= p.photo_url %>" alt="product image">
+              <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
               <p><%= p.name.capitalize %></p>
               <p>$<%= format_price(p.price) %></p>
             </article>
