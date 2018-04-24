@@ -1,6 +1,16 @@
 class SessionsController < ApplicationController
   # skip_before_action :require_login, only: [:create]
 
+  def failure
+    auth_hash = request.env['omniauth.auth']
+
+    logger.debug "MADE IT TO FAILURE"
+    logger.debug "Auth_hash = #{auth_hash}"
+    logger.debug "params = #{params}"
+
+
+  end
+
   def login
     auth_hash = request.env['omniauth.auth']
 
