@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
 
   def root
+    active = Product.where(product_active: true)
+    @staff_picks = active.sample(10)
   end
 
   def index
