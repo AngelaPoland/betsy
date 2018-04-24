@@ -22,16 +22,19 @@
       <td>
         <%= form_for :order_product, url: order_path(@current_cart.id), method: :patch do |f| %>
         <%= f.hidden_field :order_product_id, value: order_product.id %>
-        <%= f.select(:quantity, (1..(order_product.product.inventory + order_product.quantity))) %>
+        <%= f.select :quantity, (1..(order_product.product.inventory + order_product.quantity)), selected: order_product.quantity %>
 
         <%= f.submit "Update Quantity", class: "button" %>
         <% end %>
       </td>
       <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
-      <td><%= link_to 'DELETE ORDERPRODUCT' %></td>
+      <td>
+        <%= link_to "Remove from Cart", order_product_path(order_product.id), method: :delete, class: "button" %>
+      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
 <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>
+<%= link_to "Empty Cart", order_path(@current_cart.id), method: :delete, class: "button" %>
