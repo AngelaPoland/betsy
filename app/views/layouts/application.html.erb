@@ -39,34 +39,30 @@
     </nav>
   </header>
 
-
-  <nav class="nav2"> #this is going to be the sometimes hidden 2nd nav
-    <div>
-      <ul>
-        <li><%= link_to "Shop All Products", products_path %>
-        </li>
-
-
-          <li>
-            <class="dropdown menu" data-dropdown-menu="hover1" data-options="is_hover:true; hover_timeout:5000">Shop By Category</a>
-
-            <ul id="hover1" class="f-dropdown" data-dropdown-content>
-              <% Category.all.each do |category| %>
-              <li><%= link_to category.category_name, category_products_path(category.id) %></li>
-              <% end %>
-            </ul>
-          </li>
-          <li>
-            <a data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">Shop by Merchant</a>
-            <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
-              <% Merchant.all.each do |merchant| %>
-              <li><%= link_to merchant.username, merchant_products_path(merchant.id) %></li>
-              <% end %>
-            </ul>
-          </li>
+  <nav class="nav2">
+    <ul class="dropdown menu" data-dropdown-menu >
+      <li>
+        <li> <%= link_to "Shop All Products", products_path %> </li>
+        <ul class="vertical menu nested">
+          <%= link_to "Shop by Merchant"  %>
+          <% Merchant.all.each do |merchant| %>
+          <li><%= link_to merchant.username, merchant_products_path(merchant.id) %></li>
+          <% end %>
         </ul>
-      </div>
-    </nav>
+      </li>
+      <li>
+        <%= link_to "Shop by Category" %>
+        <ul class="vertical menu nested">
+          <% Category.all.each do |category| %>
+          <li><%= link_to category.category_name, category_products_path(category.id) %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
 
     <ul>
       <% flash.each do | name, message | %>

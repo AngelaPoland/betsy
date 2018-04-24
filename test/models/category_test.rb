@@ -26,7 +26,7 @@ describe Category do
 
     it "has and belongs to products" do
       category.must_respond_to :product
-      
+      skip
     end
 
   end
