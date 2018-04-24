@@ -1,21 +1,20 @@
 class SessionsController < ApplicationController
   # skip_before_action :require_login, only: [:create]
 
-  def failure
-    auth_hash = request.env['omniauth.auth']
-
-    logger.debug "MADE IT TO FAILURE"
-    logger.debug "Auth_hash = #{auth_hash}"
-    logger.debug "params = #{params}"
-
-
-  end
+  # def failure
+  #   auth_hash = request.env['omniauth.auth']
+  #
+  #   logger.debug "MADE IT TO FAILURE"
+  #   logger.debug "Auth_hash = #{auth_hash}"
+  #   logger.debug "params = #{params}"
+  #
+  # end
 
   def login
     auth_hash = request.env['omniauth.auth']
 
-    logger.debug "MADE IT TO LOGIN"
-    logger.debug "Auth_hash = #{auth_hash}"
+    # logger.debug "MADE IT TO LOGIN"
+    # logger.debug "Auth_hash = #{auth_hash}"
 
     if auth_hash['uid']
       @merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')

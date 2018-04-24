@@ -21,7 +21,7 @@ nora:
 kat:
   username: kat
   email: kat@kat.com
-  uid: 98765432
+  uid: 98765432o
   provider: github
 
 user:
