@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :create, :update, :destroy]
 
+  get '/cart', to: 'orders#index', as: 'cart'
   get '/orders/:id/checkout', to: 'orders#checkout', as: 'checkout'
   patch '/orders/:id/paid', to: 'orders#paid', as: 'order_paid'
 

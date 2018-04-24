@@ -33,7 +33,7 @@
         <% end %>
         <li>
           <% count = Order.find_by(id: session[:order_id]).order_products.count %>
-          <%= link_to "Cart(#{count})", order_path(@current_cart.id) %>
+          <%= link_to "Cart(#{count})", cart_path %>
         </li>
       </ul>
     </nav>
