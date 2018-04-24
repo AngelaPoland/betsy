@@ -1,4 +1,5 @@
 require "test_helper"
+require "pry"
 
 describe Order do
   let(:order) { Order.new }
@@ -9,7 +10,7 @@ describe Order do
       order_one.valid?.must_equal true
     end
 
-    it "must be valid when billing info is blank and status is pending" do
+    it "must be valid when billing info is blank and status is nil" do
       order_five = orders(:order_five)
       order_five.valid?.must_equal true
     end
@@ -24,15 +25,5 @@ describe Order do
       order_five.status = "paid"
       order_five.valid?.must_equal false
     end
-
-    it "must be invalid when billing info is filled and status is pending" do
-      order_four = orders(:order_four)
-      order_four.status = "pending"
-      order_four.valid?.must_equal false
-    end
-
-
   end
-
-
 end
