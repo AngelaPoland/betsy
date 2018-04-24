@@ -8,8 +8,10 @@ class ProductsController < ApplicationController
 
     @top_rated = []
 
+    i = 0
     10.times do
-      @top_rated << sorted.first
+      @top_rated << sorted[i]
+      i +=1
     end
 
 
