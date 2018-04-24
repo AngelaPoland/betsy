@@ -20,7 +20,6 @@ sage:
   inventory: 15
   merchant: ange
   photo_url: https://picsum.photos/200/?random
-  reviews: review2, review3
 
 hoodie:
   id: 3
