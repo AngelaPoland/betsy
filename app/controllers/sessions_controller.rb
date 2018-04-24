@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
   def login
     auth_hash = request.env['omniauth.auth']
 
+    logger.debug "MADE IT TO LOGIN"
+    logger.debug "Auth_hash = #{auth_hash}"
+
     if auth_hash['uid']
       @merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')
 
