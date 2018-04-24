@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 kombucha:
+  id: 1
   name: kombucha
   price: 39
   description: Subway tile hexagon letterpress austin cloud bread helvetica.
@@ -8,8 +9,10 @@ kombucha:
   inventory: 31
   merchant: mads
   photo_url: https://picsum.photos/200/?random
+  categories: food, beverage
 
 sage:
+  id: 2
   name: sage
   price: 43
   description: Mustache paleo sustainable green juice jianbing vegan plaid. Bushwick man bun poke pickled beard, williamsburg lumbersexual.
@@ -17,8 +20,10 @@ sage:
   inventory: 15
   merchant: ange
   photo_url: https://picsum.photos/200/?random
+  reviews: review2, review3
 
 hoodie:
+  id: 3
   name: hoodie
   price: 77
   description: Artisan brooklyn plaid woke yuccie flannel truffaut copper mug irony leggings.
@@ -28,6 +33,7 @@ hoodie:
   photo_url: https://picsum.photos/200/?random
 
 manbun:
+  id: 4
   name: man bun
   price: 25
   description: Chia 90's activated charcoal shabby chic twee seitan marfa vinyl tilde chambray yr cornhole street art pickled.
@@ -37,6 +43,7 @@ manbun:
   photo_url: https://picsum.photos/200/?random
 
 chemex:
+  id: 5
   name: chemex
   price: 39
   description: Migas marfa iPhone prism four dollar toast truffaut man bun messenger bag pug pop-up.
@@ -45,7 +52,8 @@ chemex:
   merchant: kat
   photo_url: https://picsum.photos/200/?random
 
-salt lamp:
+salt_lamp:
+  id: 6
   name: salt lamp
   price: 56
   description: Typewriter la croix vape yr. Distillery venmo tousled, pour-over pop-up hexagon deep v green juice.
@@ -54,7 +62,8 @@ salt lamp:
   merchant: user
   photo_url: https://picsum.photos/200/?random
 
-kale chips:
+kale_chips:
+  id: 7
   name: kale chips
   price: 9
   description: Beard affogato pork belly mlkshk franzen. children virus nibh, in zombies brains unknown ghost creepy.

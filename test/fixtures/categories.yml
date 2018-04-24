@@ -7,7 +7,7 @@ extra:
 home:
   category_name: Home
 food:
-  category_name: food
+  category_name: Food
 beverage:
   category_name: Beverage
 kitchen:
