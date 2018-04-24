@@ -72,10 +72,24 @@ describe Product do
     end
 
     it "has a list of reviews" do
-      
+      manbun = products(:manbun)
+      manbun.must_respond_to :reviews
+      manbun.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
     end
 
     it "has a list of order_products" do
+      kombucha = products(:kombucha)
+      kombucha.must_respond_to :order_products
+      kombucha.order_products.each do |order_product|
+        order_product.must_be_kind_of OrderProduct
+      end
+    end
+  end
+
+  describe "average_rating" do
+    it "can calculate the average rating of a product" do
 
     end
   end
