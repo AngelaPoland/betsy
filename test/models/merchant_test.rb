@@ -46,4 +46,28 @@ describe Merchant do
       end
     end
   end
+
+  describe "custom methods" do
+
+    describe "self.build_from_github" do
+
+      it "returns a new merchant" do
+
+        new_hash = {
+          provider: "github",
+          uid: 12345,
+          info: {email: "angela@test.com",
+          nickname: "testyaself" }
+        }
+
+        new_merchant = Merchant.build_from_github(new_hash)
+        
+        new_merchant.must_be_instance_of Merchant
+        new_merchant.valid?.must_equal true
+
+      end
+
+    end
+
+  end
 end
