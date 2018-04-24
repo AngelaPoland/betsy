@@ -3,22 +3,16 @@ class ProductsController < ApplicationController
   def root
     active = Product.where(product_active: true)
     @staff_picks = active.sample(10)
-
     sorted = active.sort_by {|p| p.average_rating}
-
     @top_rated = []
-
     i = 0
     10.times do
       @top_rated << sorted[i]
       i +=1
     end
-
-
   end
 
   def index
-
     if params[:category_id]
       if Category.find_by(id: params[:category_id]).nil?
         render_404
@@ -55,6 +49,9 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.merchant = Merchant.find_by(id: params[:merchant_id])
     @product.product_active = true
+    if params[:product][:photo_url] == ""
+      @product.photo_url = valid_image
+    end
     if @product.save
       flash[:success] = "Successfully created product!"
       redirect_to product_path(@product.id)
@@ -71,8 +68,14 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
+    if @product.photo_url.empty? && params[:product][:photo_url].empty?
+      @product.photo_url = valid_image
+    elsif params[:product][:photo_url] != ""
+      @product.photo_url = params[:product][:photo_url]
+    else
+      @product.photo_url = @product.photo_url
+    end
     if @product.update(product_params)
-
       flash[:success] = "Successfully updated your product:  #{@product.name}"
       redirect_to product_path(@product.id)
     else
@@ -136,6 +139,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :price, :inventory, :photo_url, :description, categories: [])
+  end
+
+  def valid_image
+    "placeholder.jpg"
   end
 
 end
