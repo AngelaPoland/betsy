@@ -15,4 +15,12 @@ class Order < ApplicationRecord
 
   # validates_inclusion_of :rating, in: (1..5), allow_nil: true
 
+  def calculate_total
+    total = 0
+    self.order_products.each do |order_product|
+      total += order_product.calculate_cost
+    end
+    total
+  end
+
 end
