@@ -1,11 +1,21 @@
 class OrdersController < ApplicationController
   def show
-  end
-
-  def create
+    @order = Order.find_by(id: params[:id])
   end
 
   def update #when dealing with cart before checkout
+    order_product = OrderProduct.find_by(id: params[:order_product][:order_product_id])
+    product = order_product.product
+    new_quantity = params[:order_product][:quantity]
+    inventory_difference = new_quantity.to_i - order_product.quantity
+    order_product.quantity = new_quantity
+    product.inventory -= inventory_difference
+    if order_product.save && product.save
+      flash[:success] = "Sucessfully updated quantity"
+    else
+      flash[:alert] = "Unable to update quantity"
+    end
+    redirect_to order_path(@current_cart.id)
   end
 
   def checkout #edit to enter billing info
