@@ -25,8 +25,16 @@ describe Category do
   describe "relationships" do
 
     it "has and belongs to products" do
-      category.must_respond_to :product
-      skip
+      category1 = categories(:food)
+
+      product = Product.find_by(name: "kombucha")
+      category1.must_respond_to :products
+      category1.products.must_include product
+      category.products.length.must_equal 2
+    end
+
+    it "can have no products" do
+      category.valid?.must_equal true
     end
 
   end
