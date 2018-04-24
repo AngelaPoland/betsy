@@ -1,34 +1,53 @@
 require "test_helper"
 
 describe ProductsController do
-  it "should get index" do
-    get products_index_url
-    value(response).must_be :success?
+  describe "root" do
+    it "succeeds for active products" do
+      get root_path
+      must_respond_with :success
+    end
+
+    it "succeeds for no active products" do
+      products = Product.where(product_active: true)
+      products.each do |product|
+        product.update_attributes(product_active: false)
+      end
+      get root_path
+      must_respond_with :success
+    end
+
+    it "succeeds if there are no products" do
+      products = Product.where(product_active: true)
+      products.each do |product|
+        product.destroy
+      end
+      get root_path
+      must_respond_with :success
+    end
   end
 
-  it "should get show" do
-    get products_show_url
-    value(response).must_be :success?
+  describe "index" do
+
   end
 
-  it "should get new" do
-    get products_new_url
-    value(response).must_be :success?
+  describe "show" do
+
   end
 
-  it "should get create" do
-    get products_create_url
-    value(response).must_be :success?
+  describe "new" do
+
   end
 
-  it "should get edit" do
-    get products_edit_url
-    value(response).must_be :success?
+  describe "create" do
+
   end
 
-  it "should get update" do
-    get products_update_url
-    value(response).must_be :success?
+  describe "should get edit" do
+
+  end
+
+  describe "should get update" do
+
   end
 
 end
