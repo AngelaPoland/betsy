@@ -30,6 +30,7 @@ hoodie:
   inventory: 5
   merchant: nora
   photo_url: https://picsum.photos/200/?random
+  categories: clothes
 
 manbun:
   id: 4
