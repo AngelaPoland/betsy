@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    # DPR: this will actually render a 404 page in production
-    raise ActionController::RoutingError.new('Not Found')
+    render file: "/public/404.html", status: 404
+    # raise ActionController::RoutingError.new('Not Found')
   end
 
 end
