@@ -9,13 +9,15 @@ class Product < ApplicationRecord
   validates_numericality_of :inventory, :only_integer => true, :greater_than_or_equal_to => 0
 
   def average_rating
-    num_of_ratings = 0
+    num_of_ratings = self.reviews.count
     total = 0.0
     self.reviews.each do |review|
       total += review.rating
-      num_of_ratings += 1
     end
+    return 0 if num_of_ratings == 0
     average = (total/num_of_ratings)
     return average
   end
+
+
 end

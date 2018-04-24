@@ -3,6 +3,18 @@ class ProductsController < ApplicationController
   def root
     active = Product.where(product_active: true)
     @staff_picks = active.sample(10)
+
+    sorted = active.sort_by {|p| p.average_rating}
+
+    @top_rated = []
+
+    i = 0
+    10.times do
+      @top_rated << sorted[i]
+      i +=1
+    end
+
+
   end
 
   def index
