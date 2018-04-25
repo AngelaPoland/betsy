@@ -1,22 +1,19 @@
 class CategoriesController < ApplicationController
+
+  before_action :require_login, only: [:new, :creates]
+
   def new
     @category = Category.new
   end
 
   def create
-    if @current_merchant
-      @category = Category.new(category_params)
-      if @category.save
-        flash[:success] = "created new category"
-        # needs a different path when we are further along
-        redirect_to products_path
-      else
-        flash.now[:error] = @category.errors
-        render :new
-      end
+    @category = Category.new(category_params)
+    if @category.save
+      flash[:success] = "created new category"
+      redirect_to products_manager_path
     else
-      flash[:alert] = "You need to be logged in to create a category."
-      redirect_to root_path
+      flash.now[:error] = @category.errors
+      render :new
     end
   end
 
