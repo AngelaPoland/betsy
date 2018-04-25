@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
 
+  before_action :require_login, only: [:new, :create, :edit, :update, :product_status]
+  before_action :confirm_current_merchant, only: [:new, :create, :edit, :update, :product_status]
+
   def root
     active = Product.where(product_active: true)
     @staff_picks = active.sample(10)
@@ -46,19 +49,19 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
-    @product.merchant = Merchant.find_by(id: params[:merchant_id])
-    @product.product_active = true
-    if params[:product][:photo_url] == ""
-      @product.photo_url = valid_image
-    end
-    if @product.save
-      flash[:success] = "Successfully created product!"
-      redirect_to product_path(@product.id)
-    else
-      flash.now[:error] = @product.errors
-      render :new
-    end
+      @product = Product.new(product_params)
+      @product.merchant = @merchant.id
+      @product.product_active = true
+      if params[:product][:photo_url] == ""
+        @product.photo_url = valid_image
+      end
+      if @product.save
+        flash[:success] = "Successfully created product!"
+        redirect_to product_path(@product.id)
+      else
+        flash.now[:error] = @product.errors
+        render :new
+      end
   end
 
   def edit
@@ -131,8 +134,12 @@ class ProductsController < ApplicationController
   def product_status
     status = params[:product_active]
     @product = Product.find_by(id: params[:id])
-    @product.update_attributes(product_active: status)
-    redirect_to products_manager_path
+    if @product.nil?
+      redirect_to account_page_path
+    else
+      @product.update_attributes(product_active: status)
+      redirect_to products_manager_path
+    end
   end
 
   private
