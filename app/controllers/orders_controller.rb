@@ -5,6 +5,10 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:alert] = "That order does not exist"
+      redirect_back fallback_location: enter_order_path
+    end
   end
 
   def update #when dealing with cart before checkout
