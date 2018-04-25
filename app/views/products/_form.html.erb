@@ -10,7 +10,12 @@
   <%= f.text_area :description %>
   <%= f.label :photo_url %>
   <%= f.text_field :photo_url %>
+  <%= f.label :category %>
   <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name ) %>
+  <%= f.fields_for :categories, @product.categories.build do |categories_fields| %>
+    <%= categories_fields.label "Add new category" %>
+    <%= categories_fields.text_field :category_name %>
+  <% end %>
   <br>
   <%= f.submit "Submit", class: "button" %>
 <% end %>

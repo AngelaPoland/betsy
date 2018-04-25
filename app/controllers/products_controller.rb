@@ -5,14 +5,14 @@ class ProductsController < ApplicationController
 
   def root
     active = Product.where(product_active: true)
-    @staff_picks = active.sample(10)
-    sorted = active.sort_by {|p| p.average_rating}
-    @top_rated = []
-    i = 0
-    10.times do
-      @top_rated << sorted[i]
-      i +=1
+    if active.count < 10
+      i = active.length
+      @staff_picks = active.sample(i)
+    else
+      @staff_picks = active.sample(10)
     end
+    @top_rated = active.sort_by {|p| p.average_rating}
+    @top_rated = @top_rated[0..9]
   end
 
   def index
@@ -49,19 +49,20 @@ class ProductsController < ApplicationController
   end
 
   def create
-      @product = Product.new(product_params)
-      @product.merchant = @merchant.id
-      @product.product_active = true
-      if params[:product][:photo_url] == ""
-        @product.photo_url = valid_image
-      end
-      if @product.save
-        flash[:success] = "Successfully created product!"
-        redirect_to product_path(@product.id)
-      else
-        flash.now[:error] = @product.errors
-        render :new
-      end
+    @product = Product.new(product_params)
+    @product.merchant = @merchant.id
+
+    @product.product_active = true
+    if params[:product][:photo_url] == ""
+      @product.photo_url = valid_image
+    end
+    if @product.save
+      flash[:success] = "Successfully created product!"
+      redirect_to product_path(@product.id)
+    else
+      flash.now[:error] = @product.errors
+      render :new
+    end
   end
 
   def edit
@@ -145,7 +146,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :inventory, :photo_url, :description, categories: [])
+    params.require(:product).permit(:name, :price, :inventory, :photo_url, :description, category_ids: [], categories_attributes: [:category_name])
   end
 
   def valid_image
