@@ -1,7 +1,9 @@
 <h2><%= @current_merchant.username %></h2>
 <section class="order-fulfillment">
+  <% if @order_products.empty? %>
+    <h2>No one wants to support your business ¯\_(ツ)_/¯</h2>
+  <% else %>
   <h3>All Orders: </h3>
-
   <table>
     <thead>
       <tr>
@@ -35,6 +37,5 @@
       <% end %>
     </tbody>
   </table>
-
-
+<% end %>>
 </section>

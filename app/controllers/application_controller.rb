@@ -4,8 +4,23 @@ class ApplicationController < ActionController::Base
   before_action :current_merchant
   before_action :current_cart
 
+  def require_login
+    if !@current_merchant
+      flash[:alert] = "You need to be logged in."
+      redirect_to root_path
+    end
+  end
+
+  def confirm_current_merchant
+    merchant = Merchant.find_by(id: params[:merchant_id])
+    if @current_merchant != merchant
+      flash[:alert] = "You do not have access to this merchant's account."
+      redirect_back fallback_location: account_page_path
+    end
+  end
+
   def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    @current_merchant ||= Merchant.find_by(id: session[:merchant_id])
   end
 
   def current_cart
