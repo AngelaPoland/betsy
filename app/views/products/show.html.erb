@@ -49,6 +49,6 @@
 
   <section>
     <% if @current_merchant != @product.merchant %>
-      <p><%= link_to "Write a Review", new_product_review_path(@product.id) %></p>
+      <p><%= link_to "Write a Review", new_product_review_path(@product.id), class: "button" %></p>
     <% end %>
   </section>

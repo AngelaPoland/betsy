@@ -11,5 +11,6 @@
   <%= f.label :photo_url %>
   <%= f.text_field :photo_url %>
   <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name ) %>
-  <%= f.submit %>
+  <br>
+  <%= f.submit "Submit", class: "button" %>
 <% end %>
