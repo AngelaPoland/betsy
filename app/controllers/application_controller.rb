@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :current_cart
 
   def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    @current_merchant ||= Merchant.find_by(id: session[:merchant_id])
   end
 
   def current_cart
