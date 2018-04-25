@@ -66,6 +66,14 @@ class OrdersController < ApplicationController
     redirect_to order_path(@current_cart.id)
   end
 
+  def enter_order
+  end
+
+  def find_order
+    order = Order.find((params[:order][:id]).to_i)
+    redirect_to order_path(order.id)
+  end
+
   private
 
   def billing_params

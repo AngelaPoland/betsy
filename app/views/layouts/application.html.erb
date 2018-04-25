@@ -61,9 +61,6 @@
     </ul>
   </nav>
 
-
-
-
     <ul>
       <% flash.each do | name, message | %>
       <li>
@@ -78,4 +75,8 @@
     </main>
 
   </body>
+
+  <footer>
+  <%= link_to "Find Confirmation Order", enter_order_path %>
+  </footer>
   </html>
