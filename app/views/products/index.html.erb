@@ -18,7 +18,7 @@
       <% if p.product_active %>
       <article class="grid-item">
         <%= link_to product_path(p.id) do %>
-            <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
+            <%= image_tag p.photo_url, :size => "300x300", alt:"product image" unless p.photo_url.blank? %>
             <p><%= p.name.capitalize %></p>
             <p>$<%= format_price(p.price) %></p>
         <% end %>
