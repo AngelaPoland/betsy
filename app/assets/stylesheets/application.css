@@ -1,29 +1,122 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *= require normalize-rails
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*= require normalize-rails
 
- *
- *= require_tree .
- *= require_self
- *= require foundation_and_overrides
+*
+*= require_tree .
+*= require_self
+*= require foundation_and_overrides
 
- */
- /*.custom-dropdown-container-class {
-   @include dropdown-container();
+*/
+/*.custom-dropdown-container-class {
+@include dropdown-container();
 
-   li { @include dropdown-style; }
- }*/
+li { @include dropdown-style; }
+}*/
 
-.page-header li {
-  display: inline;
-  padding-right: 10px;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /*font-family: 'Work Sans', sans-serif;*/
+  /*font-family: 'Helvetica', sans-serif;*/
+  /*font-family: 'Quicksand', sans-serif;*/
+  /*font-family: 'Roboto', sans-serif;*/
+  font-family: 'Montserrat', sans-serif;
+  /*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif*/
+  margin: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+h3, h5 {
+  text-align: center;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+footer {
+  width: 100%;
+  min-height: 30px;
+  margin: 50px auto;
+  padding: 20px 20px 40px 20px;
+  text-align: center;
+}
+
+img {
+  border-radius: 5px;
+}
+
+.title {
+  letter-spacing: 3px;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+.dropdown.menu {
+  margin-bottom: 2rem;
+  border: none;
+}
+
+.dropdown.menu a {
+  padding-left: 0rem;
+  margin-right: 2rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  /*grid-template-columns: 1fr 1fr 1fr 1fr (auto-fit, 186px);*/
+  /*grid-template-columns: repeat(auto-fit, 186px);*/
+  grid-column-gap: 25px;
+  grid-row-gap: 25px;
+}
+
+.grid-item {
+  justify-self: center;
+  align-items: center;
+}
+
+.button {
+  background-color: #000000 !important;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
 }
