@@ -43,6 +43,8 @@
       </li>
       <% end %>
     </ul>
+
+    <% unless action_name == ("index" || "show" || "root") && action_name != ("new" || "create" || "edit" || "update" || "checkout" || "paid") %>
     <nav class="nav2">
       <ul  class="menu dropdown" data-dropdown-menu >
         <li><%= link_to "Shop All Products", products_path %></li>
@@ -64,6 +66,10 @@
         </li>
       </ul>
     </nav>
+    <%end%>
+
+
+
     <main>
       <%= yield %>
     </main>
