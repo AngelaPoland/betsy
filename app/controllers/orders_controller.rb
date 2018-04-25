@@ -70,8 +70,14 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    order = Order.find((params[:order][:id]).to_i)
-    redirect_to order_path(order.id)
+    order = Order.find_by(id: (params[:order][:id]).to_i)
+    if order
+      flash[:success] = "Successfully found your Confirmation Order"
+      redirect_to order_path(order.id)
+    else
+      flash[:alert] = "That Order does not exist"
+      redirect_to enter_order_path
+    end
   end
 
   private
