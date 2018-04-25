@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   has_many :reviews, dependent: :destroy
   belongs_to :merchant
+  accepts_nested_attributes_for :categories
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0, less_than: 1000000 }
