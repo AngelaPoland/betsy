@@ -87,11 +87,11 @@ describe ProductsController do
 
   end
 
-  describe "should get edit" do
+  describe "edit" do
 
   end
 
-  describe "should get update" do
+  describe "update" do
 
   end
 
