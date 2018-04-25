@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(order.id)
     else
       flash[:alert] = "That Order does not exist"
-      redirect_to enter_order_path
+      render :enter_order
     end
   end
 
