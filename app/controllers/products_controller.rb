@@ -86,9 +86,16 @@ class ProductsController < ApplicationController
 
   def add_to_order
     product = Product.find_by(id: params[:id])
+    quantity = params[:order_products][:inventory].to_i
     if product.nil?
       flash[:alert] = "That product does not exist"
       redirect_to products_path
+    elsif quantity.nil? || quantity == 0
+      flash[:alert] = "We cannot add 0 products to your Cart -.-"
+      redirect_to product_path(product.id)
+    elsif quantity > product.inventory
+      flash[:alert] = "Sorry, that amount is not available"
+      redirect_to product_path(product.id)
     elsif product.merchant == @current_merchant
       flash[:alert] = "This is your product"
       redirect_to products_path
@@ -106,7 +113,6 @@ class ProductsController < ApplicationController
           product.save
           flash[:success] = "Successfully added product to cart"
           redirect_to product_path(product.id)
-          # redirect_to order_path(@current_cart.id)
         else
           flash[:alert] = "Failed to add to cart"
           render :show
