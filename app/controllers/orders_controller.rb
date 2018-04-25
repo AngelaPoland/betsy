@@ -66,6 +66,20 @@ class OrdersController < ApplicationController
     redirect_to order_path(@current_cart.id)
   end
 
+  def enter_order
+  end
+
+  def find_order
+    order = Order.find_by(id: (params[:order][:id]).to_i)
+    if order
+      flash[:success] = "Successfully found your Confirmation Order"
+      redirect_to order_path(order.id)
+    else
+      flash[:alert] = "That Order does not exist"
+      render :enter_order
+    end
+  end
+
   private
 
   def billing_params

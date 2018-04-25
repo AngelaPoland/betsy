@@ -5,7 +5,7 @@
     <li>
       <% @staff_picks.each do |p| %>
       <article>
-        <img src= "<%= p.photo_url %>" alt="product image">
+        <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
         <p><%= link_to p.name.capitalize, product_path(p.id) %></p>
         <p>$<%= format_price(p.price) %></p>
       </article>
@@ -20,7 +20,7 @@
     <li>
       <% @top_rated.each do |p| %>
       <article>
-        <img src= "<%= p.photo_url %>" alt="product image">
+        <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
         <p><%= link_to p.name.capitalize, product_path(p.id) %></p>
         <p>$<%= format_price(p.price) %></p>
       </article>

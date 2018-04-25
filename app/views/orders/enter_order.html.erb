@@ -1,0 +1,6 @@
+<h1>Find Order</h1>
+<%= form_for :order, url: find_order_path, method: :get do |f| %>
+  <%= f.label :id, "Enter your Order ID" %>
+  <%= f.text_field :id %>
+  <%= f.submit "Find Order" %>
+<% end %>

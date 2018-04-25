@@ -23,4 +23,21 @@ class Order < ApplicationRecord
     total
   end
 
+  def find_order_merchants
+    find_order_merchants = []
+    self.order_products.each do |order_product|
+      find_order_merchants << order_product.product.merchant
+    end
+    return find_order_merchants
+  end
+
+  def completed_order?
+    self.order_products.each do |order_product|
+      if order_product.status != "shipped"
+        return false
+      end
+    end
+    return true
+  end
+
 end

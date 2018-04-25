@@ -8,10 +8,12 @@ class OrderProduct < ApplicationRecord
 
   validates :status, presence: true, inclusion: {in: STATUS}
 
-
-
   def calculate_cost
     self.product.price * self.quantity
+   end
+
+   def pending_order?
+       return self.status == "paid"
    end
 
 end
