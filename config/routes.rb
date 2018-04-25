@@ -2,9 +2,13 @@ Rails.application.routes.draw do
 
   root 'products#root'
 
-  resources :merchants, except: [:index, :create, :new, :edit, :update, :destroy] do
+  resources :merchants, except: [:index, :show, :create, :new, :edit, :update, :destroy] do
     resources :products, only: [:index, :new, :create, :edit, :update]
   end
+
+  get '/merchant/account_page', to: 'merchants#account_page', as: 'account_page'
+  get '/merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
+  get '/merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
 
   get '/auth/failure', to: 'sessions#failure'
 
@@ -12,15 +16,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  get '/merchant/account_page', to: 'merchants#account_page', as: 'account_page'
-
-  get '/merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
-
-  get '/merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
-
-  resources :products, only: [:index, :show]
-
-  resources :products, only: [:show] do
+  resources :products, only: [:index, :show] do
     resources :reviews, only: [:new, :create]
   end
 
@@ -29,7 +25,6 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :create, :update, :destroy]
 
   get '/enter_order', to: 'orders#enter_order', as: 'enter_order'
-
   get '/find_order', to: 'orders#find_order'
 
   get '/cart', to: 'orders#index', as: 'cart'
@@ -41,10 +36,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#logout', as: 'logout'
 
   resources :order_products, only: [:edit, :update, :destroy]
-
-  patch '/merchant/:merchant_id/products/:id/active', to: 'products#active', as: 'active'
-
-  patch '/merchant/:merchant_id/products/:id/retired', to: 'products#retire', as: 'retire'
 
   patch '/merchant/:merchant_id/products/:id/status', to: 'products#product_status', as: 'product_status'
 

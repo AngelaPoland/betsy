@@ -1,8 +1,5 @@
   class MerchantsController < ApplicationController
 
-  def index
-  end
-
   def account_page #show - only visible by OAuth
     if !@current_merchant
       flash[:alert] = "You do not have access to this Merchant's account"
