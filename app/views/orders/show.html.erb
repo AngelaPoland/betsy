@@ -1,58 +1,57 @@
 <% if @order.find_order_merchants.include?(@current_merchant) %>
-<h2>Billing Info for Order <%= @order.id  %></h2>
+  <h2>Billing Info for Order <%= @order.id  %></h2>
 
-<table>
-  <tr>
-    <th>Name: </th>
-    <td><%= @order.billing_name  %></td>
-  </tr>
-  <tr>
-    <th>Email</th>
-    <td><%= @order.billing_email  %></td>
-  </tr>
-  <tr>
-    <th>Address</th>
-    <td><%= @order.billing_address  %></td>
-  </tr>
-  <tr>
-    <th>Last 4 of CC</th>
-    <td><%= @order.billing_num.last(4)  %></td>
-  </tr>
-  <tr>
-    <th>CC Exp.</th>
-    <td><%= @order.billing_exp  %></td>
-  </tr>
-</table>
-
-<% else %>
-<% order_products = @order.order_products %>
-<h2>Confirmation Order</h2>
-<% if @order.completed_order? %>
-<h3>Order Completed! </h3>
-<% else %>
-<h3> Status <%= @order.status %> </h3>
-<% end %>
-
-<table>
-  <thead>
+  <table>
     <tr>
-      <th>Order Product</th>
-      <th>Status</th>
+      <th>Name: </th>
+      <td><%= @order.billing_name  %></td>
     </tr>
-  </thead>
-
-  <tbody>
-    <% order_products.each do |order_product| %>
     <tr>
-      <td><%= order_product.product.name %></td>
-      <td><% if order_product.pending_order? %> awaiting shipment
-        <% else %>
-        <%= order_product.status %>
+      <th>Email</th>
+      <td><%= @order.billing_email  %></td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td><%= @order.billing_address  %></td>
+    </tr>
+    <tr>
+      <th>Last 4 of CC</th>
+      <td><%= @order.billing_num.last(4)  %></td>
+    </tr>
+    <tr>
+      <th>CC Exp.</th>
+      <td><%= @order.billing_exp  %></td>
+    </tr>
+  </table>
+
+<% else %>
+  <% order_products = @order.order_products %>
+  <h2>Confirmation Order</h2>
+    <% if @order.completed_order? %>
+      <h3>Order Completed! </h3>
+    <% else %>
+      <h3> Status <%= @order.status %> </h3>
+    <% end %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order Product</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% order_products.each do |order_product| %>
+      <tr>
+        <td><%= order_product.product.name %></td>
+        <td><% if order_product.pending_order? %> awaiting shipment
+          <% else %>
+          <%= order_product.status %>
+          <% end %>
+        </td>
         <% end %>
-      </td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-
+      </tr>
+    </tbody>
+  </table>
 <% end %>
