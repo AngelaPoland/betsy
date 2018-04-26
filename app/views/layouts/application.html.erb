@@ -82,8 +82,8 @@
       <%= yield %>
     </main>
   </body>
-  <footer>
-    <p id="find-order"><%= link_to "Find Order", enter_order_path %></p>
+  <footer id="footer">
+    <p id="find-order"><%= link_to "Homepage", root_path %>   |   <%= link_to "Find An Order", enter_order_path %>   |   <%= link_to "About Us", root_path %></p>
     <p class="copyright ">Copyright 2018, MAKN it Work</p>
   </footer>
 </html>
