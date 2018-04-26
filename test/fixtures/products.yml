@@ -20,6 +20,7 @@ sage:
   inventory: 15
   merchant: ange
   photo_url: https://picsum.photos/200/?random
+  categories: food, extra
 
 hoodie:
   id: 3

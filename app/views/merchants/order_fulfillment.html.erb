@@ -3,11 +3,16 @@
   <% if @merchant_orders.empty? %>
     <h2>No one wants to support your business ¯\_(ツ)_/¯</h2>
   <% else %>
-  <%= link_to "All Orders", order_fulfillment_path %>
-  <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid") %>
-  <%= link_to "Shipped", order_fulfillment_path(status: "shipped") %>
-  <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled") %>
-  <h3>All Orders: </h3>
+  <p>View Orders By:</p>
+  <%= link_to "All Orders", order_fulfillment_path, class: "button" %>
+  <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid"), class: "button" %>
+  <%= link_to "Shipped", order_fulfillment_path(status: "shipped"), class: "button" %>
+  <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled"), class: "button" %>
+  <% if @merchant_orders.count != @order_products.count %>
+    <h3>Orders by Status - <%= params[:status].capitalize %>:</h3>
+  <% else %>
+    <h3>All Orders:</h3>
+  <% end %>
   <table>
     <thead>
       <tr>
@@ -16,7 +21,7 @@
         <th>Total</th>
         <th>Order Status</th>
         <th>Options</th>
-        
+
       </tr>
     </thead>
 

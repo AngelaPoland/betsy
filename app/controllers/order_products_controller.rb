@@ -1,9 +1,21 @@
 class OrderProductsController < ApplicationController
 
+  before_action :require_login, only: [:update]
+
   def update
+    valid_status = ["shipped", "cancelled"]
     order_status = params[:status]
     @order_product = OrderProduct.find_by(id: params[:id])
-    @order_product.update_attributes(status: order_status)
+    if @order_product && order_status && valid_status.include?(order_status)
+      if @order_product.merchant == @current_merchant
+        @order_product.update_attributes(status: order_status)
+        flash[:success] = "Successfully changed that order status"
+      else
+        flash[:alert] = "Not yours. You don't have that much power"
+      end
+    else
+      flash[:alert] = "Something about that request doesn't exist"
+    end
     redirect_to order_fulfillment_path
   end
 
@@ -21,6 +33,6 @@ class OrderProductsController < ApplicationController
     else
       flash[:alert] = "That doesn't exist in your Cart"
     end
-    redirect_to order_path(@current_cart.id)
+    redirect_to cart_path
   end
 end
