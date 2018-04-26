@@ -38,7 +38,9 @@
       <% end %>
     </tbody>
   </table>
-  <%= @order.total %>
+
+  <strong>Total: </strong>
+  <%= "#{format_price(@current_cart.calculate_total)}" %>
 
 
   <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>
