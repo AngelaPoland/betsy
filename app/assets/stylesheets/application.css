@@ -135,6 +135,11 @@ img:hover {
   color: #43ECAE;
 }
 
+a:hover {
+  color: #8467E7;
+}
+
+
 
 .merchant-options {
   text-align: center;
