@@ -36,13 +36,20 @@
         </span>
       </nav>
     </header>
-    <ul>
       <% flash.each do | name, message | %>
-      <li>
-        <%= name %>: <%= message %>
-      </li>
+      <% if name == "error" %>
+      <ul>
+        <% flash[:error].each do |field, error_message| %>
+          <li>
+            <strong><%= field %>: </strong>
+              <%= error_message %>
+        </li>
+        <% end %>
+      </ul>
+      <% else %>
+        <p><%= name %>: <%= message %></p>
+        <% end %>
       <% end %>
-    </ul>
 
     <% unless controller_name == "merchants" || action_name == "new"|| action_name == "edit" || action_name == "checkout" || (controller_name != "products" && action_name == "index") %>
 
