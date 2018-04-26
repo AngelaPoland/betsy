@@ -13,3 +13,7 @@
     </li>
   </ul>
 </section>
+
+
+<%= @paid_orders.inject(0){|sum,x| sum + x }
+ %>

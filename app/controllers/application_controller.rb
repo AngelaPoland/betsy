@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper 
   protect_from_forgery with: :exception
 
   before_action :current_merchant
@@ -31,6 +32,7 @@ class ApplicationController < ActionController::Base
       session[:order_id] = @current_cart.id
     end
   end
+
 
   def render_404
     render file: "/public/404.html", status: 404
