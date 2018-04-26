@@ -20,6 +20,7 @@ class MerchantsController < ApplicationController
 
 
   def order_fulfillment
+    <<<<<<< HEAD
     @merchant_orders = []
     @current_merchant.products.each do |product|
       product.order_products.each do |order_product|

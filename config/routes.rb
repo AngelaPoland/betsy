@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get '/auth/github', as: 'github_login'
   delete '/logout', to: 'sessions#logout', as: 'logout'
 
-  resources :order_products, only: [:edit, :update, :destroy]
+  resources :order_products, only: [:update, :destroy]
 
   patch '/merchant/:merchant_id/products/:id/status', to: 'products#product_status', as: 'product_status'
 

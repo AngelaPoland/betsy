@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   has_many :reviews, dependent: :destroy
   belongs_to :merchant
-  accepts_nested_attributes_for :categories
+  accepts_nested_attributes_for :categories, reject_if: proc { |attributes| attributes['category_name'].blank?}
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0, less_than: 1000000 }
@@ -19,6 +19,14 @@ class Product < ApplicationRecord
     average = (total/num_of_ratings)
     return average
   end
+
+  # def categories_attributes=(category_attributes)
+  #   return if category_attributes.empty?
+  #   category_attributes.values.each do |category_attribute|
+  #     category = Category.find_or_create_by(category_attribute)
+  #     self.categories << category
+  #   end
+  # end
 
 
 end
