@@ -29,7 +29,6 @@
     <h4>Reviews</h4>
     <p>
       Average rating:
-
       <% if @product.reviews.count == 0 %>
         <i>
           No Reviews Yet
@@ -38,7 +37,7 @@
       <%= @product.average_rating %>
       <%end%>
     </p>
-    <section>
+    <section class="review-section">
       <% if @current_merchant != @product.merchant %>
         <p><%= link_to "Write a Review", new_product_review_path(@product.id), class: "button" %></p>
       <% end %>
