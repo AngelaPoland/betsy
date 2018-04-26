@@ -55,7 +55,19 @@ describe SessionsController do
 
       must_redirect_to root_path
     end
-
-
   end
+
+  describe "logout" do
+
+  it "can log out a logged in user" do
+    #login user from fixtures
+    login(merchants(:nora))
+    delete logout_path
+
+    session[:merchant_id].must_be_nil
+    must_redirect_to root_path
+  end
+
+end
+
 end
