@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
     else
       flash[:alert] = "Unable to update quantity"
     end
-    redirect_to order_path(@current_cart.id)
+    redirect_to cart_path
   end
 
   def checkout #edit to enter billing info
@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
       if @current_cart.save
         flash[:success] = "Order received! Thank you for your purchase."
         session[:order_id] = Order.create.id
+        redirect_to order_path(order.id)
       else
         flash.now[:error] = @current_cart.errors
         render :checkout
@@ -67,7 +68,7 @@ class OrdersController < ApplicationController
     else
       flash[:alert] = "Unable to empty your Cart at this time"
     end
-    redirect_to order_path(@current_cart.id)
+    redirect_to cart_path
   end
 
   def enter_order
