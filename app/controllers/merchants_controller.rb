@@ -1,5 +1,7 @@
 class MerchantsController < ApplicationController
   def account_page
+    @total_net_revenue = []
+
     @total_orders = []
     @current_merchant.products.each do |product|
       product.order_products.each do |order_product|
@@ -7,14 +9,42 @@ class MerchantsController < ApplicationController
       end
     end
 
+    @total_orders.each do |order_product|
+      @total_net_revenue << order_product.product.price
+    end
+
+    @pending_totals = []
+
     @pending_orders = @total_orders.select { |order| order.status == "pending" }
+
+    @pending_orders.each do |order_product|
+      @pending_totals << order_product.product.price
+    end
+
+
+    @paid_totals = []
 
     @paid_orders = @total_orders.select { |order| order.status == "paid" }
 
+    @paid_orders.each do |order_product|
+      @paid_totals << order_product.product.price
+    end
+
+    @cancelled_totals = []
+
     @cancelled_orders = @total_orders.select { |order| order.status == "cancelled" }
+
+    @cancelled_orders.each do |order_product|
+      @cancelled_totals << order_product.product.price
+    end
+
+    @shipped_totals = []
 
     @shipped_orders = @total_orders.select { |order| order.status == "shipped" }
 
+    @shipped_orders.each do |order_product|
+      @shipped_totals << order_product.product.price
+    end
   end
 
 
