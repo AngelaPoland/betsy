@@ -11,6 +11,7 @@
       flash[:alert] = "You do not have access to this Merchant's order page"
     else
       @order_products = []
+      @merchant_orders = []
       if params[:status]
         order_products = OrderProduct.status(params[:status])
         order_products.each do | order_product |
@@ -21,6 +22,11 @@
           product.order_products.each do |order_product|
             @order_products << order_product
           end
+        end
+      end
+      @current_merchant.products.each do |product|
+        product.order_products.each do |order_product|
+          @merchant_orders << order_product
         end
       end
     end
