@@ -3,6 +3,9 @@
   <% if @order_products.empty? %>
     <h2>No one wants to support your business ¯\_(ツ)_/¯</h2>
   <% else %>
+  <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid") %>
+  <%= link_to "Shipped", order_fulfillment_path(status: "shipped") %>
+  <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled") %>
   <h3>All Orders: </h3>
   <table>
     <thead>
@@ -37,5 +40,5 @@
       <% end %>
     </tbody>
   </table>
-<% end %>>
+<% end %>
 </section>

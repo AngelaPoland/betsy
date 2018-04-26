@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-  
+
   def update
     order_status = params[:status]
     @order_product = OrderProduct.find_by(id: params[:id])
