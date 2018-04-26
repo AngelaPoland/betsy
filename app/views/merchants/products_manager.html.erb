@@ -27,7 +27,7 @@
     <tbody>
       <% @products.each do | product | %>
       <tr>
-        <td><%= product.name %></td>
+        <td><%= link_to product.name, product_path(product.id) %></td>
         <td><%= product.price %></td>
         <td><%= product.inventory %></td>
         <td><%= product.product_active == true ? "Active" : "Retired" %></td>
