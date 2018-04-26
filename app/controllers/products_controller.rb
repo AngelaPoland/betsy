@@ -91,7 +91,7 @@ class ProductsController < ApplicationController
         redirect_to product_path(@product.id)
       else
         flash[:error] = @product.errors
-        render :edit, status: :error
+        redirect_to edit_merchant_product_path(@current_merchant.id, @product.id)
       end
     end
   end

@@ -69,7 +69,10 @@ describe ProductsController do
 
   describe "show" do
     it "gets an individual product's page" do
-     get product_path(2)
+     id = Product.find_by(name: "sage").id
+
+     get product_path(id)
+
      must_respond_with :success
    end
 
@@ -130,7 +133,8 @@ describe ProductsController do
         }
       }.wont_change 'Product.count'
 
-      must_respond_with :error
+      must_respond_with :redirect
+      must_redirect_to new_merchant_product_path(nora.id)
     end
   end
 
@@ -165,9 +169,9 @@ describe ProductsController do
           photo_url: "https://picsum.photos/200/?random"
         }
       }
-      updated_work = Product.find_by(id: 3)
+      updated_product = Product.find_by(name: "blue hoodie")
 
-      updated_work.name.must_equal "blue hoodie"
+      updated_product.name.must_equal "blue hoodie"
       must_respond_with :redirect
     end
 
@@ -183,7 +187,12 @@ describe ProductsController do
           photo_url: "https://picsum.photos/200/?random"
         }
       }
-      must_respond_with :error
+
+      unchanged_product = Product.find_by(name: "man bun")
+
+      unchanged_product.name.must_equal "man bun"
+      must_respond_with :redirect
+      must_redirect_to edit_merchant_product_path(nora.id, product.id)
     end
 
     it "renders 404 not_found for a bogus product ID" do
