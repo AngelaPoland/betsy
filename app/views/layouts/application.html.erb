@@ -42,8 +42,12 @@
       <dl>
         <% flash[:error].each do |field, error_messages| %>
           <dt><strong><%= field.upcase %></strong></dt>
-          <% error_messages.each do |error_message| %>
-            <dd> >> <%= error_message %></dd>
+          <% if error_messages.class == Array %>
+            <% error_messages.each do |error_message| %>
+              <dd> >> <%= error_message %></dd>
+            <% end %>
+          <% else %>
+            <dd> >> <%= error_messages %></dd>
           <% end %>
         </li>
         <% end %>
