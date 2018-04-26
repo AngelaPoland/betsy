@@ -1,5 +1,5 @@
 <h1><%= page_title %></h1>
-<%= form_for @merchant, @product do |f| %>
+<%= form_for [@merchant, @product] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :price %>
@@ -12,11 +12,10 @@
   <%= f.text_field :photo_url %>
   <%= f.label :category %>
   <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name ) %>
-  <!-- <%= f.fields_for :categories, @product.categories.build do |categories_fields| %>
+  <%= f.fields_for :categories, @product.categories.build do |categories_fields| %>
     <%= categories_fields.label "Add new category" %>
     <%= categories_fields.text_field :category_name %>
-    <%= categories_fields.submit "Add Category", class: "button" %>
   <% end %>
-  <br> -->
+  <br>
   <%= f.submit "Submit", class: "button" %>
 <% end %>
