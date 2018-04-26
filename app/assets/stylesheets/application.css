@@ -127,6 +127,11 @@ img:hover {
   border-radius: 5px;
 }
 
+.button:hover {
+  color: #43ECAE;
+}
+
+
 .merchant-options {
   text-align: center;
 }
@@ -152,6 +157,14 @@ img:hover {
 .show-section1 {
   margin-bottom: 20px;
   flex-shrink: 0;
+}
+
+#footer {
+  border-top: solid thin;
+}
+
+#find-order {
+  text-align: left;
 }
 
 @media screen and (max-width: 1000px) {
