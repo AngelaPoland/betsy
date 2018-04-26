@@ -151,6 +151,7 @@ img:hover {
 
 .show-section1 {
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 @media screen and (max-width: 1000px) {

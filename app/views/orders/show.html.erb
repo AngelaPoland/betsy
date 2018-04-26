@@ -26,11 +26,12 @@
 
 <% else %>
   <% order_products = @order.order_products %>
-  <h2>Confirmation Order</h2>
+  <h2>Order Confirmation</h2>
     <% if @order.completed_order? %>
       <h3>Order Completed! </h3>
     <% else %>
-      <h3> Status <%= @order.status %> </h3>
+      <p> Order Status: <%= @order.status %> </p>
+      <p> Order #  <%= @order.id %> </p>
     <% end %>
 
   <table>
