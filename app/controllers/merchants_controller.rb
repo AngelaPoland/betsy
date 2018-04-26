@@ -1,25 +1,51 @@
 class MerchantsController < ApplicationController
+  def account_page
+    @total_orders = []
+    @current_merchant.products.each do |product|
+      product.order_products.each do |order_product|
+        @total_orders << order_product
+      end
+    end
 
-  before_action :require_login
+    @pending_orders = @total_orders.select { |order| order.status == "pending" }
 
-  def account_page #show - only visible by OAuth
+    @paid_orders = @total_orders.select { |order| order.status == "paid" }
+
+    @cancelled_orders = @total_orders.select { |order| order.status == "cancelled" }
+
+    @shipped_orders = @total_orders.select { |order| order.status == "shipped" }
+
   end
 
+
+
   def order_fulfillment
-    status = params[:status]
-    valid_status = ["paid", "shipped", "cancelled"]
-    @order_products = []
     @merchant_orders = []
-    order_products = OrderProduct.all
-    order_products = OrderProduct.status(params[:status]) if status && valid_status.include?(status)
-    order_products.each do | order_product |
-      @order_products << order_product if order_product.merchant == @current_merchant
-    end
     @current_merchant.products.each do |product|
-      product.order_products.each { |order_product| @merchant_orders << order_product }
+      product.order_products.each do |order_product|
+        @merchant_orders << order_product
+      end
     end
-    if !valid_status.include?(status)
-      flash[:alert] = "Try a real status next time"
+
+    all_orders = OrderProduct.all
+    filtered_orders = all_orders.status(params[:status])
+    @order_products = []
+
+    if params[:status].present?
+      filtered_orders.each do |order_product|
+        merchant = order_product.product.merchant
+        if merchant == @current_merchant
+          @order_products << order_product
+        end
+      end
+
+    else
+      all_orders.each do |order_product|
+        merchant = order_product.product.merchant
+        if merchant == @current_merchant
+          @order_products << order_product
+        end
+      end
     end
   end
 
