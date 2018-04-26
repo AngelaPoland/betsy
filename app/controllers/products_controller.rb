@@ -63,8 +63,8 @@ class ProductsController < ApplicationController
       flash[:success] = "Successfully created product!"
       redirect_to product_path(@product.id)
     else
-      flash.now[:error] = @product.errors
-      render :new, status: :error
+      flash[:error] = @product.errors
+      redirect_to new_merchant_product_path(@current_merchant.id)
     end
   end
 
