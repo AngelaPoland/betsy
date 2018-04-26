@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
       @staff_picks = active.sample(10)
     end
     @top_rated = active.sort_by {|p| p.average_rating}
+    @top_rated.reverse!
     @top_rated = @top_rated[0..9]
   end
 

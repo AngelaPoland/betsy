@@ -1,13 +1,13 @@
-<h2><%= @current_merchant.username%></h2>
+<h2>Merchant: <%= @current_merchant.username%></h2>
 <section class="products-manager">
   <h3>Product Management: </h3>
 
   <ul class="product-page">
     <li class="add_product">
-      <%=  link_to "Add a Product", new_merchant_product_path(@current_merchant.id) %>
+      <%=  link_to "Add a Product", new_merchant_product_path(@current_merchant.id), class: "button" %>
     </li>
     <li class="add_category">
-      <%=  link_to "Add a category", new_category_path %>
+      <%=  link_to "Add a category", new_category_path, class: "button" %>
     </li>
   </ul>
 

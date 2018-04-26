@@ -107,6 +107,10 @@ img:hover {
   margin-right: 2rem;
 }
 
+.dropdown.menu li:nth-child(2) {
+  padding-left: 10px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
@@ -126,6 +130,11 @@ img:hover {
   color: #FFFFFF;
   border-radius: 5px;
 }
+
+.button:hover {
+  color: #43ECAE;
+}
+
 
 .merchant-options {
   text-align: center;
@@ -152,6 +161,14 @@ img:hover {
 .show-section1 {
   margin-bottom: 20px;
   flex-shrink: 0;
+}
+
+#footer {
+  border-top: solid thin;
+}
+
+#find-order {
+  text-align: left;
 }
 
 @media screen and (max-width: 1000px) {
