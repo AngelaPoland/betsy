@@ -8,7 +8,7 @@
 * You're free to add application-wide styles to this file and they'll appear at the bottom of the
 * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
 * files in this directory. Styles in this file should be added after the last require_* statement.
-* It is generally better to create a new file per style scope.
+* It is generally better to creaxte a new file per style scope.
 *= require normalize-rails
 
 *
@@ -131,13 +131,24 @@ img:hover {
   border-radius: 5px;
 }
 
+.merchant-options {
+  text-align: center;
+}
+
 .button:hover {
   color: #43ECAE;
 }
 
+ .merchant-options {
+   text-align: center;
+ }
 
-.merchant-options {
-  text-align: center;
+#footer {
+  border-top: solid thin;
+}
+
+#find-order {
+  text-align: left;
 }
 
 .account-page {
@@ -163,14 +174,6 @@ img:hover {
   flex-shrink: 0;
 }
 
-#footer {
-  border-top: solid thin;
-}
-
-#find-order {
-  text-align: left;
-}
-
 @media screen and (max-width: 1000px) {
   .grid-container {
     grid-template-columns: 1fr 1fr 1fr;
@@ -181,19 +184,19 @@ img:hover {
   .grid-container {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-@media screen and (max-width: 600px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
 
   .show-container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+}
 
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  
   .show-section2 {
     margin-left: 0px;
   }
