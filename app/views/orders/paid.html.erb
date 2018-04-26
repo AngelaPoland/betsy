@@ -1,6 +1,9 @@
-<h1>Confirmation of Order</h1>
-<h3>Order Sucessfully!</h3>
-<%= @current_cart.id %>
+<h1>Order Confirmation</h1>
+<h3>Thank you for your order! See you next time, hipster.</h3>
+<p>
+  Your order # is
+<%= @current_cart.id %></p>
+
 <% if session[:order_id].nil? %>
   <h3>Cart Empty</h3>
 <% end %>
