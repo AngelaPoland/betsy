@@ -3,13 +3,75 @@
   <h3>Account Options: </h3>
   <ul class="account-page">
     <li class="manage-products">
-      <%=  link_to "Manage Products", products_manager_path %>
+      <%=  link_to "Manage Products", products_manager_path, class: "button" %>
     </li>
     <li class="order-fulfillment">
-      <%=  link_to "All Orders", order_fulfillment_path %>
+      <%=  link_to "All Orders", order_fulfillment_path, class: "button" %>
     </li>
     <li class="new-category">
-      <%=  link_to "Create a Category", new_category_path  %>
+      <%=  link_to "Create a Category", new_category_path, class: "button"  %>
     </li>
   </ul>
+</section>
+
+<section class="order-fulfillment">
+  <h3>Summary</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Total Revenue for Pending Orders: </th>
+        <td><%= "#{format_price(@pending_totals.inject(0){|sum,x| sum + x })}" %></td>
+      </tr>
+      <tr>
+        <th>Total Revenue for Paid Orders: </th>
+        <td><%= "#{format_price(@paid_totals.inject(0){|sum,x| sum + x })}" %></td>
+      </tr>
+      <tr>
+        <th>Total Revenue for Cancelled Orders: </th>
+        <td><%= "#{format_price(@cancelled_totals.inject(0){|sum,x| sum + x })}" %></td>
+      </tr>
+      <tr>
+        <th>Total Revenue for Shipped Orders: </th>
+        <td><%= "#{format_price(@shipped_totals.inject(0){|sum,x| sum + x })}" %></td>
+      </tr>
+      <tr>
+        <th><strong>Total Net Revenue: </strong></th>
+        <td><%= "#{format_price(@total_net_revenue.inject(0){|sum,x| sum + x })}" %></td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Orders</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Total Pending Orders: </th>
+        <td><%= @pending_orders.count %></td>
+      </tr>
+      <tr>
+        <th>Total Paid Orders: </th>
+        <td><%= @paid_orders.count %></td>
+      </tr>
+      <tr>
+        <th>Total Cancelled Orders: </th>
+        <td><%= @cancelled_orders.count %></td>
+      </tr>
+      <tr>
+        <th>Total Shipped Orders: </th>
+        <td><%= @shipped_orders.count %></td>
+      </tr>
+      <tr>
+        <th><strong>Total Orders: </strong></th>
+        <td><%= @total_orders.count %></td>
+      </tr>
+    </tbody>
+  </table>
 </section>

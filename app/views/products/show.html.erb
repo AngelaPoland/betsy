@@ -1,26 +1,29 @@
 
-<section class="row product">
   <h3> Product: <%= @product.name %> </h3>
+  <div class="show-container">
+    <section class="show-section1">
+      <%= image_tag @product.photo_url, :size => "400x400", alt:"product image" unless @product.photo_url.blank? %>
+    </section>
+    <section class="show-section2">
+      <p>Merchant: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
+      <p>Description: <%=@product.description %></p>
+      <p>Cost: $<%= format_price(@product.price) %></p>
+      <% if @product.inventory == 0 %>
+        <p><i>Out of Stock</i></p>
+        <%else%>
+      <p><%= @product.inventory %> in stock</p>
+        <%end%>
+      <p>Categories: <% @product.categories.each do |c| %> <%= link_to c.category_name, category_products_path(c.id)  %>
+        <% end %></p>
+        <p>Quantity:</p>
+        <%= form_for :order_products, url: add_to_order_path(@product.id), method: :get do |f| %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.select(:inventory, (1..@product.inventory)) %>
 
-  <%= image_tag @product.photo_url, :size => "400x400", alt:"product image" unless @product.photo_url.blank? %>
-  <p>Merchant: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
-  <p>Description: <%=@product.description %></p>
-  <p>Cost: $<%= format_price(@product.price) %></p>
-  <% if @product.inventory == 0 %>
-    <p><i>Out of Stock</i></p>
-    <%else%>
-  <p><%= @product.inventory %> in stock</p>
-    <%end%>
-  <p>Categories: <% @product.categories.each do |c| %> <%= link_to c.category_name, category_products_path(c.id)  %>
-    <% end %></p>
-    <p>Quantity:</p>
-    <%= form_for :order_products, url: add_to_order_path(@product.id), method: :get do |f| %>
-    <%= f.hidden_field :product_id, value: @product.id %>
-    <%= f.select(:inventory, (1..@product.inventory)) %>
-
-    <%= f.submit "Add to Cart", class: "button" %>
-    <% end %>
-  </section>
+        <%= f.submit "Add to Cart", class: "button" %>
+        <% end %>
+    </section>
+  </div>
 
   <section>
     <h4>Reviews</h4>

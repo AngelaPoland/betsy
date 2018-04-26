@@ -135,11 +135,23 @@ img:hover {
   border: dotted;
   margin-left: 500px;
   margin-right: 500px;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   border-radius: 20px;
 }
 
+.show-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.show-section2 {
+  margin-left: 40px;
+}
+
+.show-section1 {
+  margin-bottom: 20px;
+}
 
 @media screen and (max-width: 1000px) {
   .grid-container {
@@ -156,5 +168,15 @@ img:hover {
 @media screen and (max-width: 600px) {
   .grid-container {
     grid-template-columns: 1fr;
+  }
+
+  .show-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .show-section2 {
+    margin-left: 0px;
   }
 }
