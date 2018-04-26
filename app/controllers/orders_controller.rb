@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
       if @current_cart.save
         flash[:success] = "Order received! Thank you for your purchase."
         session[:order_id] = Order.create.id
-        redirect_to order_path(order.id)
+        redirect_to order_path(@current_cart.id)
       else
         flash.now[:error] = @current_cart.errors
         render :checkout
