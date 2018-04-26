@@ -25,23 +25,23 @@
     <tbody>
       <tr>
         <th>Total Revenue for Pending Orders: </th>
-        <td><%= "#{format_price(@pending_totals.inject(0){|sum,x| sum + x })}" %></td>
+        <td><%= "$#{format_price(@pending_totals.inject(0){|sum,x| sum + x })}" %></td>
       </tr>
       <tr>
         <th>Total Revenue for Paid Orders: </th>
-        <td><%= "#{format_price(@paid_totals.inject(0){|sum,x| sum + x })}" %></td>
+        <td><%= "$#{format_price(@paid_totals.inject(0){|sum,x| sum + x })}" %></td>
       </tr>
       <tr>
         <th>Total Revenue for Cancelled Orders: </th>
-        <td><%= "#{format_price(@cancelled_totals.inject(0){|sum,x| sum + x })}" %></td>
+        <td><%= "$#{format_price(@cancelled_totals.inject(0){|sum,x| sum + x })}" %></td>
       </tr>
       <tr>
         <th>Total Revenue for Shipped Orders: </th>
-        <td><%= "#{format_price(@shipped_totals.inject(0){|sum,x| sum + x })}" %></td>
+        <td><%= "$#{format_price(@shipped_totals.inject(0){|sum,x| sum + x })}" %></td>
       </tr>
       <tr>
         <th><strong>Total Net Revenue: </strong></th>
-        <td><%= "#{format_price(@total_net_revenue.inject(0){|sum,x| sum + x })}" %></td>
+        <td><%= "$#{format_price(@total_net_revenue.inject(0){|sum,x| sum + x })}" %></td>
       </tr>
     </tbody>
   </table>

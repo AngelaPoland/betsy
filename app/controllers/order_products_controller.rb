@@ -1,3 +1,4 @@
+
 class OrderProductsController < ApplicationController
 
   before_action :require_login, only: [:update]
@@ -25,6 +26,7 @@ class OrderProductsController < ApplicationController
     if @current_cart.order_products.include?(order_product)
       quantity = order_product.quantity
       product.inventory += quantity
+
       if product.save && order_product.destroy
         flash[:success] = "Successfully removed from Cart"
       else
