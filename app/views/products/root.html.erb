@@ -6,7 +6,7 @@
       <% if !@staff_picks.nil? %>
         <% @staff_picks.each do |p| %>
         <article class="grid-item">
-          <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
+          <%= link_to image_tag(p.photo_url, :size => "300x300", alt:"product image"), product_path(p.id) unless p.photo_url.blank? %>
           <p><%= link_to p.name.capitalize, product_path(p.id) %></p>
           <p>$<%= format_price(p.price) %></p>
         </article>
@@ -22,9 +22,9 @@
     <li class="grid-container">
       <% @top_rated.each do |p| %>
       <article class="grid-item">
-        <%= image_tag p.photo_url, alt:"product image" unless p.photo_url.blank? %>
+        <%= link_to image_tag(p.photo_url, :size => "300x300", alt:"product image"), product_path(p.id) unless p.photo_url.blank? %>
         <p><%= link_to p.name.capitalize, product_path(p.id) %></p>
-        <p>$<%= format_price(p.price) %></p>
+        <p>Average rating: <%= p.average_rating.round(1) %></p>
       </article>
       <%end%>
     </li>
