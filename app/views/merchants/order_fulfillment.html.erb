@@ -1,8 +1,12 @@
 <h2><%= @current_merchant.username %></h2>
 <section class="order-fulfillment">
-  <% if @order_products.empty? %>
+  <% if @merchant_orders.empty? %>
     <h2>No one wants to support your business ¯\_(ツ)_/¯</h2>
   <% else %>
+  <%= link_to "All Orders", order_fulfillment_path %>
+  <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid") %>
+  <%= link_to "Shipped", order_fulfillment_path(status: "shipped") %>
+  <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled") %>
   <h3>All Orders: </h3>
   <table>
     <thead>
@@ -37,5 +41,5 @@
       <% end %>
     </tbody>
   </table>
-<% end %>>
+<% end %>
 </section>

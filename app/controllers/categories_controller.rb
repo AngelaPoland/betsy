@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
       redirect_to products_manager_path
     else
       flash.now[:error] = @category.errors
-      render :new
+      render :new, status: :error
     end
   end
 
