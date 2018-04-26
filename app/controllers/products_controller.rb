@@ -44,14 +44,17 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
     @merchant = Merchant.find_by(id: params[:merchant_id])
+    # if @merchant.nil?
+    #   flash[:alert] = "Merchant does not exist."
+    #   redirect_to root_path
+    # end
+    @product = Product.new
   end
 
   def create
     @product = Product.new(product_params)
-    @product.merchant = @merchant.id
-
+    @product.merchant = @current_merchant
     @product.product_active = true
     if params[:product][:photo_url] == ""
       @product.photo_url = valid_image
@@ -61,30 +64,35 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product.id)
     else
       flash.now[:error] = @product.errors
-      render :new
+      render :new, status: :error
     end
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
     @merchant = Merchant.find_by(id: params[:merchant_id])
+    @product = Product.find_by(id: params[:id])
+    render_404 if @product.nil?
   end
 
   def update
     @product = Product.find_by(id: params[:id])
-    if @product.photo_url.empty? && params[:product][:photo_url].empty?
-      @product.photo_url = valid_image
-    elsif params[:product][:photo_url] != ""
-      @product.photo_url = params[:product][:photo_url]
+    if @product.nil?
+      render_404
     else
-      @product.photo_url = @product.photo_url
-    end
-    if @product.update(product_params)
-      flash[:success] = "Successfully updated your product:  #{@product.name}"
-      redirect_to product_path(@product.id)
-    else
-      flash[:error] = @product.errors
-      render :edit
+      if @product.photo_url.empty? && params[:product][:photo_url].empty?
+        @product.photo_url = valid_image
+      elsif params[:product][:photo_url] != ""
+        @product.photo_url = params[:product][:photo_url]
+      else
+        @product.photo_url = @product.photo_url
+      end
+      if @product.update(product_params)
+        flash[:success] = "Successfully updated your product:  #{@product.name}"
+        redirect_to product_path(@product.id)
+      else
+        flash[:error] = @product.errors
+        render :edit, status: :error
+      end
     end
   end
 
