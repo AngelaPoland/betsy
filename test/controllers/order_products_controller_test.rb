@@ -14,9 +14,6 @@ describe OrderProductsController do
       updated_order_product.status.must_equal "shipped"
       must_respond_with :redirect
       must_redirect_to order_fulfillment_path
-
-      # why you no work!!!!
-      # grrrr...... not passing
     end
 
     it "redirects to root page if no merchant is logged in" do
@@ -53,21 +50,25 @@ describe OrderProductsController do
       updated_order_product.status.must_equal "paid"
       must_respond_with :redirect
       must_redirect_to order_fulfillment_path
-
-      # currently not passing for the right reasons
     end
   end
 
   describe "destroy" do
-    let(:order_product_2) { order_products(:order_05) }
     it "redirects to cart and successfully destroy order_product record" do
+      product = products(:sage)
+      get add_to_order_path(product.id), params: { order_products: { inventory: 4 } }
 
-      proc { delete order_product_path(order_product_2.id), session: {order_id: orders(:order_one).id} }.must_change "OrderProduct.count", -1
+      order = Order.last
+      new_order_product = order.order_products.first
+      # new_order_product = OrderProduct.find_by(order_id: cart.id)
+
+      proc { delete order_product_path(new_order_product.id) }.must_change "OrderProduct.count", -1
 
       must_respond_with :redirect
       must_redirect_to cart_path
     end
     it "redirects to cart and handles if order_product is invalid" do
+      get root_path
       proc { delete order_product_path(" ") }.wont_change "OrderProduct.count"
 
       must_respond_with :redirect

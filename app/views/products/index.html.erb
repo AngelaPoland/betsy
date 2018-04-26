@@ -19,7 +19,7 @@
       <article class="grid-item">
         <%= link_to product_path(p.id) do %>
             <%= link_to image_tag(p.photo_url, :size => "300x300", alt:"product image"), product_path(p.id) unless p.photo_url.blank? %>
-            <p><%= p.name.capitalize %></p>
+            <p><%= link_to p.name.capitalize, product_path(p.id) %></p>
             <p>$<%= format_price(p.price) %></p>
         <% end %>
       </article>

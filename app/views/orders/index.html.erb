@@ -1,7 +1,7 @@
 <h1>Your Cart</h1>
 
 <% if @current_cart.order_products.empty? %>
-  <h2>Your Cart is Empty :P</h2>
+  <h4>Please add some items. You know that trust fund money is burning a hole in your pocket, afterall.</h4>
 <% else %>
   <table>
     <thead>
@@ -40,7 +40,7 @@
   </table>
 
   <strong>Total: </strong>
-  <%= "#{format_price(@current_cart.calculate_total)}" %>
+  <%= "$#{format_price(@current_cart.calculate_total)}" %>
 
 
   <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>

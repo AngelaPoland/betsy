@@ -136,12 +136,17 @@ img:hover {
 }
 
 .button:hover {
-  color: #43ECAE;
+  color: #24AB82;
 }
 
- .merchant-options {
+.merchant-options {
    text-align: center;
- }
+}
+
+a:hover {
+  color: #24AB82;
+}
+
 
 #footer {
   border-top: solid thin;
@@ -196,7 +201,7 @@ img:hover {
   .grid-container {
     grid-template-columns: 1fr;
   }
-  
+
   .show-section2 {
     margin-left: 0px;
   }
