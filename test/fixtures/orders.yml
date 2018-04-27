@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 order_one:
-  status:
+  status: 
   billing_email:
   billing_address:
   billing_name:
