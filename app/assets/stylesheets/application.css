@@ -23,6 +23,26 @@
 li { @include dropdown-style; }
 }*/
 
+.flash-container {
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.flash-container > *:not(.error) {
+  background-color: #24AB82;
+  padding: 5px 0;
+}
+
+.flash-container h4.error {
+  border-bottom: 1px solid DarkRed;
+}
+
+.flash-container .error {
+  color: DarkRed;
+  background-color: white;
+}
+
 table {
   margin-left:auto;
   margin-right:auto;

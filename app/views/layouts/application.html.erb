@@ -37,26 +37,31 @@
         </span>
       </nav>
     </header>
+
       <% flash.each do | name, message | %>
-      <% if name == "error" %>
-      <h4>You're doing something wrong</h4>
-      <dl>
-        <% flash[:error].each do |field, error_messages| %>
-          <dt><strong><%= field.upcase %></strong></dt>
-          <% if error_messages.class == Array %>
-            <% error_messages.each do |error_message| %>
-              <dd> >> <%= error_message %></dd>
+        <div class="flash-container">
+          <% if name == "error" %>
+          <h4 class="error">You're doing something wrong</h4>
+          <dl class="error">
+            <% flash[:error].each do |field, error_messages| %>
+              <div>
+                <dt><strong><%= field.upcase %></strong></dt>
+                <% if error_messages.class == Array %>
+                  <% error_messages.each do |error_message| %>
+                    <dd> >> <%= error_message %></dd>
+                  <% end %>
+                <% else %>
+                  <dd> >> <%= error_messages %></dd>
+                <% end %>
+              </div>
             <% end %>
+          </dl>
           <% else %>
-            <dd> >> <%= error_messages %></dd>
+            <h4><%= message %></h4>
           <% end %>
-        </li>
-        <% end %>
-      </dl>
-      <% else %>
-        <h4><%= message %></h4>
-        <% end %>
+        </div>
       <% end %>
+
 
     <% unless controller_name == "merchants" || action_name == "new"|| action_name == "edit" || action_name == "checkout" || (controller_name != "products" && action_name == "index") %>
 
