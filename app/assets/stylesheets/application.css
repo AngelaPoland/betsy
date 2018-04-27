@@ -23,9 +23,15 @@
 li { @include dropdown-style; }
 }*/
 
+table {
+  margin-left:auto;
+  margin-right:auto;
+}
+
 * {
   box-sizing: border-box;
 }
+
 
 body {
   /*font-family: 'Work Sans', sans-serif;*/
@@ -47,6 +53,10 @@ a {
   color: black;
 }
 
+h2 {
+  margin-bottom: 20px;
+
+}
 
 h3 {
   font-size: 2em;
@@ -67,12 +77,12 @@ footer {
 }
 
 @keyframes fadein {
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
 }
 
 img {
@@ -140,7 +150,7 @@ img:hover {
 }
 
 .merchant-options {
-   text-align: center;
+  text-align: center;
 }
 
 a:hover {
@@ -174,6 +184,48 @@ a:hover {
   text-align: left;
 }
 
+.shop-name {
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.account-page {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ul_top_hypers li {
+  display: inline;
+}
+
+table {
+  margin-left:auto;
+  margin-right:auto;
+  border-spacing: 2px;
+  border-collapse: separate;
+}
+
+.titles {
+  border-bottom: solid thin;
+}
+
+.order-fulfillment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#ul_table li {
+  border: 1px solid black;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.status_button {
+margin: 6px;
+}
 
 .show-container {
   display: flex;
@@ -187,6 +239,19 @@ a:hover {
 .show-section1 {
   margin-bottom: 20px;
   flex-shrink: 0;
+}
+
+.products-manager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#product-options li {
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 1000px) {
