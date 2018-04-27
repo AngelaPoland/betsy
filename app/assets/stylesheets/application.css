@@ -148,8 +148,16 @@ a:hover {
 }
 
 
+.top-nav {
+  display: grid;
+  grid-template-columns: 8fr 1fr 1fr 1fr;
+}
+
+
+
 #footer {
   border-top: solid thin;
+  padding-bottom: 5px;
 }
 
 #find-order {
@@ -196,5 +204,15 @@ a:hover {
 
   .show-section2 {
     margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .top-nav {
+    grid-template-rows: 2fr 1fr 1fr 1fr;
+  }
+  .top-nav li {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

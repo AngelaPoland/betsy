@@ -15,7 +15,7 @@
   <body>
     <header class="page-header">
       <nav class='nav1'>
-        <ul>
+        <ul class='top-nav'>
           <% if @current_merchant %>
           <li class="welcome"><%= "Welcome #{@current_merchant.username}" %></li>
           <li><%= link_to "Account", account_page_path %> </li>
