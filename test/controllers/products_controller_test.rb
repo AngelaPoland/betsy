@@ -121,6 +121,26 @@ describe ProductsController do
       must_redirect_to product_path(newproduct.id)
     end
 
+    it "creates a new product for logged-in merchant, with valid data and no photo" do
+      login(nora)
+      proc {
+        post merchant_products_path(nora.id), params: {
+          product: {
+            name: "newproduct",
+            price: 32.67,
+            description: "Super awesome new product",
+            inventory: 5,
+            photo_url: ""
+
+          }
+        }
+      }.must_change 'Product.count', 1
+
+      newproduct = Product.find_by(name: "newproduct")
+      must_respond_with :redirect
+      must_redirect_to product_path(newproduct.id)
+    end
+
     it "does not create a new product for logged-in merchant with bogus data" do
       login(nora)
       proc {
@@ -175,6 +195,7 @@ describe ProductsController do
 
       updated_product.name.must_equal "blue hoodie"
       must_respond_with :redirect
+      must_redirect_to products_manager_path
     end
 
     it "fails for bogus data and an extant product ID and logged-in user" do

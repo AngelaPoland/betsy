@@ -89,7 +89,7 @@ class ProductsController < ApplicationController
       end
       if @product.update(product_params)
         flash[:success] = "Successfully updated your product:  #{@product.name}"
-        redirect_to product_path(@product.id)
+        redirect_to products_manager_path
       else
         flash[:error] = @product.errors
         redirect_to edit_merchant_product_path(@current_merchant.id, @product.id)
