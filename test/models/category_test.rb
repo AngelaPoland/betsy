@@ -25,12 +25,21 @@ describe Category do
   describe "relationships" do
 
     it "has and belongs to products" do
-      category1 = categories(:food)
+      amaretto = Product.create(
+        name: "amaretto",
+        price: 39,
+        description: "almond goodness",
+        product_active: true,
+        inventory: 31,
+        merchant: merchants(:kat),
+      )
+      alcohol = Category.create(
+        category_name: "libations",
+        product_ids: [amaretto.id]
+      )
 
-      product = Product.find_by(name: "kombucha")
-      category1.must_respond_to :products
-      category1.products.must_include product
-      category.products.length.must_equal 2
+      alcohol.products.must_include amaretto
+      alcohol.products.length.must_equal 1
     end
 
     it "can have no products" do
