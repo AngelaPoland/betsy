@@ -1,5 +1,4 @@
 <h1>Your Cart</h1>
-
 <% if @current_cart.order_products.empty? %>
 <h4>Please add some items. You know that trust fund money is burning a hole in your pocket, afterall.</h4>
 <% else %>
@@ -14,7 +13,6 @@
       <th>Options</th>
     </tr>
   </thead>
-
   <tbody>
     <% @current_cart.order_products.each do | order_product | %>
     <% product = order_product.product %>
@@ -26,7 +24,6 @@
         <%= form_for :order_product, url: order_path(@current_cart.id), method: :patch do |f| %>
         <%= f.hidden_field :order_product_id, value: order_product.id %>
         <%= f.select :quantity, (1..(order_product.product.inventory + order_product.quantity)), selected: order_product.quantity %>
-
         <%= f.submit "Update Quantity", class: "button" %>
         <% end %>
       </td>
@@ -49,7 +46,6 @@
   </tr>
   </thead>
 </table>
-
 <ul class="cart-bottom">
   <li>
     <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>

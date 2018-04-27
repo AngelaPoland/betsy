@@ -205,10 +205,6 @@ table {
   border-collapse: separate;
 }
 
-.titles {
-  border-bottom: solid thin;
-}
-
 .order-fulfillment {
   display: flex;
   justify-content: center;
