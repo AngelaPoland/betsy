@@ -1,48 +1,61 @@
 <h1>Your Cart</h1>
 
 <% if @current_cart.order_products.empty? %>
-  <h4>Please add some items. You know that trust fund money is burning a hole in your pocket, afterall.</h4>
+<h4>Please add some items. You know that trust fund money is burning a hole in your pocket, afterall.</h4>
 <% else %>
-  <table>
-    <thead>
-      <tr>
-        <th>Product Name</th>
-        <th>Unit Price</th>
-        <th>Quantity</th>
-        <th>Edit Quantity</th>
-        <th>Subtotal</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<table>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Edit Quantity</th>
+      <th>Subtotal</th>
+      <th>Options</th>
+    </tr>
+  </thead>
 
-    <tbody>
-      <% @current_cart.order_products.each do | order_product | %>
-      <% product = order_product.product %>
-      <tr>
-        <td><%= link_to product.name, product_path(product.id) %></td>
-        <td><%= product.price %></td>
-        <td><%= order_product.quantity %></td>
-        <td>
-          <%= form_for :order_product, url: order_path(@current_cart.id), method: :patch do |f| %>
-          <%= f.hidden_field :order_product_id, value: order_product.id %>
-          <%= f.select :quantity, (1..(order_product.product.inventory + order_product.quantity)), selected: order_product.quantity %>
+  <tbody>
+    <% @current_cart.order_products.each do | order_product | %>
+    <% product = order_product.product %>
+    <tr>
+      <td><%= link_to product.name, product_path(product.id) %></td>
+      <td><%= product.price %></td>
+      <td><%= order_product.quantity %></td>
+      <td>
+        <%= form_for :order_product, url: order_path(@current_cart.id), method: :patch do |f| %>
+        <%= f.hidden_field :order_product_id, value: order_product.id %>
+        <%= f.select :quantity, (1..(order_product.product.inventory + order_product.quantity)), selected: order_product.quantity %>
 
-          <%= f.submit "Update Quantity", class: "button" %>
-          <% end %>
-        </td>
-        <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
-        <td>
-          <%= link_to "Remove from Cart", order_product_path(order_product.id), method: :delete, class: "button", data: { confirm: "Are you sure you want to remove this product?"} %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <%= f.submit "Update Quantity", class: "button" %>
+        <% end %>
+      </td>
+      <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
+      <td>
+        <%= link_to "Remove from Cart", order_product_path(order_product.id), method: :delete, class: "button", data: { confirm: "Are you sure you want to remove this product?"} %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  <thead>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><strong>Total: </strong>
+    <%= "#{format_price(@current_cart.calculate_total)}" %></td>
+    <td></td>
+  </tr>
+  </thead>
+</table>
 
-  <strong>Total: </strong>
-  <%= "#{format_price(@current_cart.calculate_total)}" %>
-
-
-  <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>
-  <%= link_to "Empty Cart", order_path(@current_cart.id), method: :delete, class: "button", data: { confirm: "Are you sure you want to empty your cart?"} %>
+<ul class="cart-bottom">
+  <li>
+    <%= link_to "Checkout", checkout_path(@current_cart.id), class: "button" %>
+  </li>
+  <li>
+    <%= link_to "Empty Cart", order_path(@current_cart.id), method: :delete, class: "button", data: { confirm: "Are you really sure about that? Spending your money with us saves the lives hipsters everywhere."} %>
+  </li>
+</ul>
 <% end %>
