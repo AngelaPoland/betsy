@@ -1,7 +1,9 @@
 <h2 class="shop-name"><%= @current_merchant.username%>'s Shop</h2>
 <section class="merchant-options">
   <h3>Account Options: </h3>
-  <ul class="account-page">
+
+
+  <ul id="ul_top_hypers" class="account-page">
     <li class="manage-products">
       <%=  link_to "Manage Products", products_manager_path, class: "button" %>
     </li>
