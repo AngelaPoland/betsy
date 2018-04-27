@@ -211,10 +211,37 @@ describe OrdersController do
     end
   end
 
-  it "should get destroy" do
-    skip
-    get orders_destroy_url
-    value(response).must_be :success?
+  describe "destroy" do
+  end
+
+  describe "enter_order" do
+    it "successfully gets the enter order form" do
+      get enter_order_path
+
+      must_respond_with :success
+    end
+  end
+
+  describe "find_order" do
+    it "successfully finds and redirects to order's show view" do
+      order = Order.find_by(id: orders(:order_four).id)
+
+      get find_order_path, params: { order: {id: "#{order.id}"} }
+
+      must_respond_with :redirect
+      must_redirect_to order_path(order.id)
+    end
+
+    it "successfully finds and redirects to order's show view" do
+      order = Order.find_by(id: orders(:order_four).id)
+      id = order.id
+      order.order_products.each { |order_product| order_product.destroy}
+      order.destroy
+
+      get find_order_path, params: { order: {id: "#{id}"} }
+
+      must_respond_with :error
+    end
   end
 
 end

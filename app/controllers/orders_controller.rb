@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
 
   def paid #submit after checkout
     @order = Order.find_by(id: params[:id])
-    if @order
+    if @order && ( @order.status == "pending" || @order.status.nil? )
       if @order.update(billing_params)
         @order.order_products.each do |order_product|
           order_product.update_attributes(status: "paid")
@@ -58,12 +58,9 @@ class OrdersController < ApplicationController
           flash.now[:error] = @order.errors
           render :checkout, status: :error
         end
-      else
-        flash[:alert] = "Insufficient funds. Go crowdfund for more"
-        render :checkout, status: :error
       end
     else
-      flash[:alert] = "Sorry. That order does not exist"
+      flash[:alert] = "Insufficient funds. Go crowdfund for more"
       redirect_to root_path
     end
   end
@@ -91,13 +88,14 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    order = Order.find_by(id: (params[:order][:id]).to_i)
+    id = params[:order][:id].to_i
+    order = Order.find_by(id: id)
     if order
       flash[:success] = "Successfully found your Confirmation Order"
       redirect_to order_path(order.id)
     else
       flash[:alert] = "That Order does not exist"
-      render :enter_order
+      render :enter_order, status: :error
     end
   end
 
