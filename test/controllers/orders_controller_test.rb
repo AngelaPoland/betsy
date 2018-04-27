@@ -2,8 +2,26 @@ require "test_helper"
 
 describe OrdersController do
   let(:order_three) { orders(:order_three) }
+  let(:order_four) { orders(:order_four) }
+
 
   describe "index" do
+    it "gets the cart index" do
+      get cart_path
+      must_respond_with :success
+    end
+
+    it "succeeds when cart is empty" do
+      order_four.order_products.each do |op|
+        op.destroy
+      end
+      order_four.destroy
+      get cart_path
+      must_respond_with :success
+    end
+
+    it "gets the cart associated with current logged-in user" do
+    end
   end
 
   describe "show" do
