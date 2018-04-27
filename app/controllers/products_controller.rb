@@ -119,30 +119,15 @@ class ProductsController < ApplicationController
       flash[:alert] = "That product is out of stock."
       render :show
     else
-      if @current_cart
-        @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: params[:order_products][:inventory], status: 'pending')
-        if @order_product.save
-          product.inventory -= params[:order_products][:inventory].to_i
-          product.save
-          flash[:success] = "Successfully added product to cart"
-          redirect_to product_path(product.id)
-        else
-          flash[:alert] = "Failed to add to cart"
-          render :show
-        end
+      @order_product = OrderProduct.new(order_id: @current_cart.id, product_id: product.id, quantity: params[:order_products][:inventory], status: 'pending')
+      if @order_product.save
+        product.inventory -= params[:order_products][:inventory].to_i
+        product.save
+        flash[:success] = "Successfully added product to cart"
+        redirect_to product_path(product.id)
       else
-        session[:order_id] = Order.create.id
-        @order_product = OrderProduct.new(order_id: session[:order_id], product_id: product.id, quantity: params[:order_products][:inventory], status: 'pending')
-        if @order_product.save
-          product.inventory -= params[:order_products][:inventory].to_i
-          product.save
-          flash[:success] = "Successfully added product to cart"
-          redirect_to product_path(product.id)
-          # redirect_to order_path(session[:order_id])
-        else
-          flash[:alert] = "Failed to add to cart"
-          render :show
-        end
+        flash[:alert] = "Failed to add to cart"
+        render :show
       end
     end
   end
