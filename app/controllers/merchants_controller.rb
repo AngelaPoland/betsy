@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
 
-  before_action :require_login
+  before_action :require_login, except: [:about_us]
 
   def account_page
     @total_net_revenue = []
@@ -85,5 +85,5 @@ class MerchantsController < ApplicationController
 
   def about_us
   end
-  
+
 end
