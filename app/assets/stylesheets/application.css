@@ -163,6 +163,11 @@ a:hover {
 
 }
 
+.us-grid {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  margin: 30px;
+}
 
 
 #footer {
@@ -188,6 +193,9 @@ a:hover {
   margin-bottom: 20px;
   flex-shrink: 0;
 }
+
+
+
 
 @media screen and (max-width: 1000px) {
   .grid-container {

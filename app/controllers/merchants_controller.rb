@@ -1,7 +1,7 @@
 class MerchantsController < ApplicationController
 
   before_action :require_login
-  
+
   def account_page
     @total_net_revenue = []
 
@@ -85,4 +85,8 @@ class MerchantsController < ApplicationController
   def products_manager
     @products = @current_merchant.products
   end
+
+  def about_us
+  end
+  
 end
