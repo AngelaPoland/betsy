@@ -32,7 +32,7 @@
         </td>
         <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
         <td>
-          <%= link_to "Remove from Cart", order_product_path(order_product.id), method: :delete, class: "button", data: { confirm: "Are you sure you want to remove this product?"} %>
+          <%= link_to "Remove from Cart", order_order_product_path(@current_cart.id, order_product.id), method: :delete, class: "button", data: { confirm: "Are you sure you want to remove this product?"} %>
         </td>
       </tr>
       <% end %>

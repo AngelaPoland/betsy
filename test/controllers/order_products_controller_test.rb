@@ -1,4 +1,5 @@
 require "test_helper"
+require "pry"
 
 describe OrderProductsController do
   let(:mads) { merchants(:mads) }
@@ -54,34 +55,37 @@ describe OrderProductsController do
   end
 
   describe "destroy" do
+    let(:order) { orders(:order_one) }
     it "redirects to cart and successfully destroy order_product record" do
-      product = products(:sage)
-      get add_to_order_path(product.id), params: { order_products: { inventory: 4 } }
+      order_product = order_products(:order_01)
 
-      order = Order.last
-      new_order_product = order.order_products.first
-      # new_order_product = OrderProduct.find_by(order_id: cart.id)
-
-      proc { delete order_product_path(new_order_product.id) }.must_change "OrderProduct.count", -1
+      proc { delete order_order_product_path(order.id, order_product.id) }.must_change "OrderProduct.count", -1
 
       must_respond_with :redirect
       must_redirect_to cart_path
     end
     it "redirects to cart and handles if order_product is invalid" do
-      get root_path
-      proc { delete order_product_path(" ") }.wont_change "OrderProduct.count"
+      order_product = order_products(:order_01)
+      id = order_product.id
+      order_product.destroy
+
+      proc { delete order_order_product_path(order.id, order_product.id) }.wont_change "OrderProduct.count"
 
       must_respond_with :redirect
       must_redirect_to cart_path
     end
-    it "redirects to cart and handles if order_product status is not pending" do
-      proc { delete order_product_path(orders(:order_04).id) }.wont_change "OrderProduct.count"
+    it "redirects to cart and handles if order status is not pending/nil" do
+      order_product = order_products(:order_04)
+
+      proc { delete order_order_product_path(orders(:order_four).id, order_product.id) }.wont_change "OrderProduct.count"
 
       must_respond_with :redirect
       must_redirect_to cart_path
     end
-    it "redirects to cart and handles if order_product is not a part of cart" do
-      proc { delete order_product_path() }.wont_change "OrderProduct.count"
+    it "redirects to cart and handles if order_product is not a part of order" do
+      order_product = order_products(:order_04)
+
+      proc { delete order_order_product_path(order.id, order_product.id) }.wont_change "OrderProduct.count"
 
       must_respond_with :redirect
       must_redirect_to cart_path
