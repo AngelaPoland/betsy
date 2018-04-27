@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 describe CategoriesController do
   let(:category) { categories(:beverage) }
   let(:ange) { merchants(:ange) }

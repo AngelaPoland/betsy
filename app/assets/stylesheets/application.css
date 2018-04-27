@@ -170,24 +170,7 @@ a:hover {
     display: inline;
 }
 
-/* .order-fulfillment {
-  border: dotted;
-  margin-left: 300px;
-  margin-right: 300px;
-  padding-top: 50px;
-  padding-bottom: 50px;
 
-  /* border-radius: 20px; */
-} */
-
-/* .account-page {
-  border: dotted;
-  margin-left: 500px;
-  margin-right: 500px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  border-radius: 20px;
-} */
 
 .show-container {
   display: flex;

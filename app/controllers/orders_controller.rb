@@ -13,42 +13,55 @@ class OrdersController < ApplicationController
 
   def update #when dealing with cart before checkout
     order_product = OrderProduct.find_by(id: params[:order_product][:order_product_id])
-    product = order_product.product
-    new_quantity = params[:order_product][:quantity]
-    inventory_difference = new_quantity.to_i - order_product.quantity
-    order_product.quantity = new_quantity
-    product.inventory -= inventory_difference
-    if order_product.save && product.save
-      flash[:success] = "Sucessfully updated quantity"
+    if !order_product.nil?
+      product = order_product.product
+      new_quantity = params[:order_product][:quantity].to_i
+      inventory_difference = new_quantity - order_product.quantity
+      order_product.quantity = new_quantity
+      product.inventory -= inventory_difference
+      if !(new_quantity > product.inventory)
+        if order_product.save && product.save
+          flash[:success] = "Successfully updated quantity"
+        else
+          flash[:alert] = "Unable to update quantity"
+        end
+      else
+        flash[:alert] = "Dee, is that you? You can't order more items than are available"
+      end
     else
-      flash[:alert] = "Unable to update quantity"
+      flash[:alert] = "Earth Creature, that doesn't exist"
     end
     redirect_to cart_path
   end
 
   def checkout #edit to enter billing info
+    order = Order.find_by(id: params[:id])
+    if order.order_products.empty?
+      flash[:alert] = "Uhh.... Your cart is having existential crisis. It's empty"
+      redirect_to cart_path
+    end
   end
 
   def paid #submit after checkout
-    if @current_cart.update(billing_params)
-      @current_cart.order_products.each do |order_product|
-        order_product.update_attributes(status: "paid")
+    @order = Order.find_by(id: params[:id])
+    if @order && ( @order.status == "pending" || @order.status.nil? )
+      if @order.update(billing_params)
+        @order.order_products.each do |order_product|
+          order_product.update_attributes(status: "paid")
+        end
+        @order.status = "paid"
+        if @order.save
+          flash[:success] = "Order received! Thank you for your purchase."
+          session[:order_id] = Order.create.id
+          redirect_to order_path(@order.id)
+        else
+          flash.now[:error] = @order.errors
+          render :checkout, status: :error
+        end
       end
-      @current_cart.status = "paid"
-      if @current_cart.save
-        flash[:success] = "Order received! Thank you for your purchase."
-        session[:order_id] = Order.create.id
-        redirect_to order_path(@current_cart.id)
-      else
-        flash.now[:error] = @current_cart.errors
-        render :checkout
-      end
-    elsif @current_cart.errors.any?
-      flash.now[:error] = @current_cart.errors
-      render :checkout
     else
-      flash[:alert] = "Something went wrong, and we couldn't process your order."
-      render :checkout
+      flash[:alert] = "Insufficient funds. Go crowdfund for more"
+      redirect_to root_path
     end
   end
 
@@ -75,13 +88,14 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    order = Order.find_by(id: (params[:order][:id]).to_i)
+    id = params[:order][:id].to_i
+    order = Order.find_by(id: id)
     if order
       flash[:success] = "Successfully found your Confirmation Order"
       redirect_to order_path(order.id)
     else
       flash[:alert] = "That Order does not exist"
-      render :enter_order
+      render :enter_order, status: :error
     end
   end
 
@@ -95,7 +109,7 @@ class OrdersController < ApplicationController
       :billing_num,
       :billing_exp,
       :billing_cvv,
-      :billing_zipcode
+      :billing_zipcode,
     )
   end
 end

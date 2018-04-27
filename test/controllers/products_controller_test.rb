@@ -7,6 +7,7 @@ describe ProductsController do
   let(:ange) { merchants(:ange) }
   let(:kat) { merchants(:kat) }
   let(:user) { merchants(:user) }
+  let(:mads) { merchants(:mads) }
   let(:nora) { merchants(:nora) }
   let(:hoodie) { products(:hoodie) }
 
@@ -273,6 +274,7 @@ describe ProductsController do
     end
 
     it "fails when product status is retired" do
+      login(mads)
       kombucha = Product.find_by(name: "kombucha")
       kombucha.product_active = false
       proc {
@@ -285,6 +287,7 @@ describe ProductsController do
     end
 
     it "fails when product is out of stock" do
+      login(mads)
       kombucha = Product.find_by(name: "kombucha")
       kombucha.inventory = 0
       proc {
@@ -294,6 +297,19 @@ describe ProductsController do
           }
         }
       }.wont_change 'OrderProduct.count'
+    end
+  end
+
+  describe "product_status" do
+    it "updates a product's status" do
+      login(kat)
+      merchant = Merchant.find_by(username: "kat")
+      chemex = Product.find_by(name: "chemex")
+      patch product_status_path(merchant.id, chemex.id), params: { product_active: false }
+
+      chemex = Product.find_by(name: "chemex")
+
+      chemex.product_active.must_equal false
     end
   end
 end

@@ -2,9 +2,27 @@ require "test_helper"
 
 describe MerchantsController do
   let(:meka) { merchants(:kat) }
+  let(:mads) { merchants(:mads) }
   describe 'account_page' do
 
     it 'successfully gets account_page view if merchant is logged in' do
+      login(mads)
+
+      get account_page_path
+
+      must_respond_with :success
+    end
+
+    it 'successfully gets account_page if has products have no order_products' do
+      login(meka)
+
+      get account_page_path
+
+      must_respond_with :success
+    end
+
+    it 'successfully gets account_page if has no products' do
+      meka.products.each { |product| product.destroy }
       login(meka)
 
       get account_page_path
@@ -27,7 +45,7 @@ describe MerchantsController do
 
   describe 'order_fulfillment' do
     it 'successfully gets order_fulfillment view if merchant is logged in' do
-      login(meka)
+      login(mads)
 
       get order_fulfillment_path
 
@@ -35,11 +53,6 @@ describe MerchantsController do
     end
 
     it 'successfully gets order_fulfillment view if merchant has no orders' do
-      meka.products.each do | product |
-        if !product.order_products.nil?
-          product.order_products.each { | order | order.destroy }
-        end
-      end
       login(meka)
 
       get order_fulfillment_path
@@ -48,15 +61,15 @@ describe MerchantsController do
     end
 
     it 'successfully gets filtered products_manager view if valid filter applied' do
-      login(meka)
+      login(mads)
 
-      get products_manager_path, params: { status: "paid" }
+      get products_manager_path, params: { status: "shipped" }
 
       must_respond_with :success
     end
 
     it 'successfully gets all products_manager view if invalid filter applied' do
-      login(meka)
+      login(mads)
 
       get products_manager_path, params: { status: "blah" }
 
