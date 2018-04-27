@@ -1,7 +1,7 @@
 class MerchantsController < ApplicationController
 
-  before_action :require_login
-  
+  before_action :require_login, except: [:about_us]
+
   def account_page
     @total_net_revenue = []
 
@@ -23,7 +23,6 @@ class MerchantsController < ApplicationController
     @pending_orders.each do |order_product|
       @pending_totals << order_product.product.price
     end
-
 
     @paid_totals = []
 
@@ -49,8 +48,6 @@ class MerchantsController < ApplicationController
       @shipped_totals << order_product.product.price
     end
   end
-
-
 
   def order_fulfillment
     @merchant_orders = []
@@ -85,4 +82,8 @@ class MerchantsController < ApplicationController
   def products_manager
     @products = @current_merchant.products
   end
+
+  def about_us
+  end
+
 end
