@@ -117,7 +117,7 @@ img:hover {
   margin-right: 2rem;
 }
 
-.dropdown.menu li:nth-child(2) {
+.dropdown.menu li {
   padding-left: 10px;
 }
 
