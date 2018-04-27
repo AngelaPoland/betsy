@@ -277,6 +277,7 @@ describe ProductsController do
       login(mads)
       kombucha = Product.find_by(name: "kombucha")
       kombucha.product_active = false
+      kombucha.save
       proc {
         get add_to_order_path(kombucha.id), params: {
           order_products: {
@@ -287,13 +288,12 @@ describe ProductsController do
     end
 
     it "fails when product is out of stock" do
-      login(mads)
-      kombucha = Product.find_by(name: "kombucha")
-      kombucha.inventory = 0
+      root_path
+      saltlamp = Product.find_by(name: "salt lamp")
       proc {
-        get add_to_order_path(kombucha.id), params: {
+        get add_to_order_path(saltlamp.id), params: {
           order_products: {
-            inventory: 9
+            inventory: 5
           }
         }
       }.wont_change 'OrderProduct.count'
