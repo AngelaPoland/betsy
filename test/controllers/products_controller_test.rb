@@ -175,6 +175,7 @@ describe ProductsController do
 
       updated_product.name.must_equal "blue hoodie"
       must_respond_with :redirect
+      must_redirect_to products_manager_path
     end
 
     it "fails for bogus data and an extant product ID and logged-in user" do
