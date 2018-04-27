@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 
 describe OrderProductsController do
   let(:mads) { merchants(:mads) }

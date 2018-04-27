@@ -55,6 +55,20 @@ describe SessionsController do
 
       must_redirect_to root_path
     end
+
+    it "redirects to the root route and doesn't create new user if given invalid user data" do
+      bad_merchant = Merchant.new(
+        provider: 'github',
+        uid: nil,
+        username: 'new test merchant',
+        email: 'test@test.com'
+      )
+
+      proc {
+      login(bad_merchant) }.must_change 'Merchant.count', 0
+
+      must_redirect_to root_path
+    end
   end
 
   describe "logout" do
