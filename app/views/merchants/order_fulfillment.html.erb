@@ -1,50 +1,50 @@
-<h2>Merchant: <%= @current_merchant.username %></h2>
+<h2 class="shop-name"><%= @current_merchant.username.capitalize %>'s Orders</h2>
 <section class="order-fulfillment">
   <% if @merchant_orders.empty? %>
     <h2>No one wants to support your business ¯\_(ツ)_/¯</h2>
   <% else %>
-  <p>View Orders By:</p>
-  <%= link_to "All Orders", order_fulfillment_path, class: "button" %>
-  <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid"), class: "button" %>
-  <%= link_to "Shipped", order_fulfillment_path(status: "shipped"), class: "button" %>
-  <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled"), class: "button" %>
-  <% if @merchant_orders.count != @order_products.count %>
-    <h3>Orders by Status - <%= params[:status].capitalize %>:</h3>
-  <% else %>
-    <h3>All Orders:</h3>
+    <%= link_to "All Orders", order_fulfillment_path, class: "button status_button" %>
+    <%= link_to "Awaiting Shipping", order_fulfillment_path(status: "paid"), class: "button status_button" %>
+    <%= link_to "Shipped", order_fulfillment_path(status: "shipped"), class: "button status_button" %>
+    <%= link_to "Cancelled", order_fulfillment_path(status: "cancelled"), class: "button status_button" %>
   <% end %>
-  <table>
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Purchase Date</th>
-        <th>Total</th>
-        <th>Order Status</th>
-        <th>Options</th>
+</section>
 
-      </tr>
-    </thead>
+<section id="summary-details" class="order-fulfillment">
+  <ul id="ul_table">
+    <li>
+      <table class="unstriped">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Purchase Date</th>
+            <th>Total</th>
+            <th>Order Status</th>
+            <th>Options</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% @order_products.each do | order_product | %>
-      <tr>
-        <td>
-          <%=  link_to order_product.order_id, order_path(order_product.order_id), class: 'order-link' %>
-        </td>
-        <td><%= order_product.order.created_at %></td>
-        <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
-        <td><%= order_product.status %>
-        </td>
-        <td>
-          <% if order_product.status == "paid" %>
-          <%= link_to "Ship", order_product_path(order_product.id, status: "shipped"), method: :patch %>
-          <%= link_to "Cancel",
-          order_product_path(order_product.id, status: "cancelled"), method: :patch  %>
+        <tbody>
+          <% @order_products.each do | order_product | %>
+          <tr>
+            <td>
+              <%=  link_to order_product.order_id, order_path(order_product.order_id), class: 'order-link' %>
+            </td>
+            <td><%= order_product.order.created_at %></td>
+            <td><%= "$#{format_price(order_product.calculate_cost)}" %></td>
+            <td><%= order_product.status %>
+            </td>
+            <td>
+              <% if order_product.status == "paid" %>
+              <%= link_to "Ship", order_product_path(order_product.id, status: "shipped"), method: :patch %> |
+              <%= link_to "Cancel",
+              order_product_path(order_product.id, status: "cancelled"), method: :patch  %>
+              <% end %>
+            </td>
+          </tr>
           <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+        </tbody>
+      </table>
+    </li>
+  </ul>
 </section>
