@@ -1,4 +1,3 @@
-
 class OrderProductsController < ApplicationController
 
   before_action :require_login, only: [:update]
@@ -22,18 +21,23 @@ class OrderProductsController < ApplicationController
 
   def destroy
     order_product = OrderProduct.find_by(id: params[:id])
-    product = order_product.product
-    if @current_cart.order_products.include?(order_product)
-      quantity = order_product.quantity
-      product.inventory += quantity
+    order = Order.find_by(id: params[:order_id])
+    if !order_product.nil? && (order.status.nil? || order.status == "pending")
+      if order.order_products.include?(order_product)
+        product = order_product.product
+        quantity = order_product.quantity
+        product.inventory += quantity
 
-      if product.save && order_product.destroy
-        flash[:success] = "Successfully removed from Cart"
+        if product.save && order_product.destroy
+          flash[:success] = "Successfully removed from Cart"
+        else
+          flash[:alert] = "Unable to delete from Cart at this moment"
+        end
       else
-        flash[:alert] = "Unable to delete from Cart at this moment"
+        flash[:alert] = "That is not yours"
       end
     else
-      flash[:alert] = "That doesn't exist in your Cart"
+      flash[:alert] = "You're hallucinating. Stop taking ayahuasca"
     end
     redirect_to cart_path
   end
