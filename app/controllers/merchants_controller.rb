@@ -24,7 +24,6 @@ class MerchantsController < ApplicationController
       @pending_totals << order_product.product.price
     end
 
-
     @paid_totals = []
 
     @paid_orders = @total_orders.select { |order| order.status == "paid" }
@@ -49,8 +48,6 @@ class MerchantsController < ApplicationController
       @shipped_totals << order_product.product.price
     end
   end
-
-
 
   def order_fulfillment
     @merchant_orders = []
