@@ -63,12 +63,20 @@ describe Product do
     end
 
     it "has a list of categories" do
-      kombucha = products(:kombucha)
-      food = categories(:food)
-      beverage = categories(:beverage)
-      kombucha.categories.must_include food
-      kombucha.categories.must_include beverage
-      kombucha.categories.length.must_equal 2
+      alcohol = Category.create(category_name: "libations")
+
+      amaretto = Product.create(
+        name: "amaretto",
+        price: 39,
+        description: "almond goodness",
+        product_active: true,
+        inventory: 31,
+        merchant: merchants(:kat),
+        category_ids: [alcohol.id]
+      )
+
+      amaretto.categories.must_include alcohol
+      amaretto.categories.length.must_equal 1
     end
 
     it "has a list of reviews" do
