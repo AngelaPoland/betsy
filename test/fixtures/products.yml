@@ -53,7 +53,7 @@ salt_lamp:
   price: 56
   description: Typewriter la croix vape yr. Distillery venmo tousled, pour-over pop-up hexagon deep v green juice.
   product_active: true
-  inventory: 16
+  inventory: 0
   merchant: user
   photo_url: https://picsum.photos/200/?random
 
