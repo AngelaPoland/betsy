@@ -179,6 +179,13 @@ a:hover {
   margin: 30px;
 }
 
+.us-box {
+  display: inline-block;
+  max-width: 400px;
+  min-width: 200px;
+  padding-bottom: 70px;
+}
+
 
 #footer {
   border-top: solid thin;
@@ -280,6 +287,12 @@ margin: 6px;
 
   .show-section2 {
     margin-left: 0px;
+  }
+
+  .us-grid {
+    display: flex;
+    flex-direction: column;
+
   }
 }
 
