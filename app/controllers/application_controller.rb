@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if session[:order_id]
-      @current_cart = Order.find(session[:order_id])
+      @current_cart = Order.find_by(id: session[:order_id])
     else
       @current_cart = Order.create
       session[:order_id] = @current_cart.id
