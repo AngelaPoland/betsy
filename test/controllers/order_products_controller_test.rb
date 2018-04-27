@@ -2,6 +2,7 @@ require "test_helper"
 
 describe OrderProductsController do
   let(:mads) { merchants(:mads) }
+  
   describe "update" do
     let(:order_product) { order_products(:order_04) }
     it "redirects and updates an order_products status when merchant logged on" do
