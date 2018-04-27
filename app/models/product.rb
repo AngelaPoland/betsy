@@ -19,14 +19,4 @@ class Product < ApplicationRecord
     average = (total/num_of_ratings)
     return average
   end
-
-  # def categories_attributes=(category_attributes)
-  #   return if category_attributes.empty?
-  #   category_attributes.values.each do |category_attribute|
-  #     category = Category.find_or_create_by(category_attribute)
-  #     self.categories << category
-  #   end
-  # end
-
-
 end

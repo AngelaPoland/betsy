@@ -5,6 +5,7 @@ describe ProductsController do
   let(:sage) { products(:sage) }
   let(:clothes) { categories(:clothes) }
   let(:ange) { merchants(:ange) }
+  let(:kat) { merchants(:kat) }
   let(:user) { merchants(:user) }
   let(:nora) { merchants(:nora) }
   let(:hoodie) { products(:hoodie) }
@@ -201,6 +202,98 @@ describe ProductsController do
       product.id = "notanid"
       put merchant_product_path(nora.id, product.id)
       must_respond_with :not_found
+    end
+  end
+
+  describe "add to order" do
+    it "succeeds for extant, in-stock product" do
+      product = Product.find_by(name: "kale chips")
+      proc {
+        get add_to_order_path(product.id), params: {
+          order_products: {
+            inventory: 3
+          }
+        }
+      }.must_change 'OrderProduct.count', 1
+      product = Product.find_by(name: "kale chips")
+      product.inventory.must_equal 31
+      order_product = OrderProduct.last
+      order_product.status.must_equal "pending"
+      order = Order.last
+      order.order_products.last.quantity.must_equal 3
+      must_respond_with :redirect
+      must_redirect_to product_path(product.id)
+    end
+
+
+    it "fails for a non-existant product" do
+      kalechips = Product.find_by(name: "kale chips")
+      kalechips.id = 78
+      proc {
+        get add_to_order_path(kalechips.id), params: {
+          order_products: {
+            inventory: 6
+          }
+        }
+      }.wont_change 'OrderProduct.count'
+    end
+
+    it "fails for a request that is greater than the inventory available" do
+      chemex = Product.find_by(name: "chemex")
+      proc {
+        get add_to_order_path(chemex.id), params: {
+          order_products: {
+            inventory: 87
+          }
+        }
+      }.wont_change 'OrderProduct.count'
+    end
+
+    it "fails for a request to add 0 products to cart" do
+      chemex = Product.find_by(name: "chemex")
+      proc {
+        get add_to_order_path(chemex.id), params: {
+          order_products: {
+            inventory: 0
+          }
+        }
+      }.wont_change 'OrderProduct.count'
+    end
+
+    it "does not allow merchant to add her own products to cart" do
+      login(kat)
+      chemex = Product.find_by(name: "chemex")
+      proc {
+        get add_to_order_path(chemex.id), params: {
+          order_products: {
+            inventory: 5
+          }
+        }
+      }.wont_change 'OrderProduct.count'
+    end
+
+    it "fails when product status is retired" do
+      kombucha = Product.find_by(name: "kombucha")
+      kombucha.product_active = false
+      proc {
+        get add_to_order_path(kombucha.id), params: {
+          order_products: {
+            inventory: 9
+          }
+        }
+      }.wont_change 'OrderProduct.count'
+    end
+
+    it "fails when product is out of stock" do
+      kombucha = Product.find_by(name: "kombucha")
+      kombucha.inventory = 0
+      proc {
+        get add_to_order_path(kombucha.id), params: {
+          order_products: {
+            inventory: 9
+          }
+        }
+      }.wont_change 'OrderProduct.count'
     end
   end
 end
