@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   get '/product/:id/add_to_order', to: 'products#add_to_order', as: 'add_to_order'
 
-  resources :orders, only: [:show, :create, :update, :destroy]
+  resources :orders, only: [:show, :create, :update, :destroy] do
+    resources :order_products, only: [:destroy]
+  end
 
   get '/enter_order', to: 'orders#enter_order', as: 'enter_order'
   get '/find_order', to: 'orders#find_order'
@@ -35,7 +37,7 @@ Rails.application.routes.draw do
   get '/auth/github', as: 'github_login'
   delete '/logout', to: 'sessions#logout', as: 'logout'
 
-  resources :order_products, only: [:update, :destroy]
+  resources :order_products, only: [:update]
 
   patch '/merchant/:merchant_id/products/:id/status', to: 'products#product_status', as: 'product_status'
 
