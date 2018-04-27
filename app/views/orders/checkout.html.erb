@@ -1,5 +1,5 @@
 <h1>Checkout your Order:</h1>
-<p>Please fill out your billing info.</p>
+<p>Please fill out your billing info. <small><i>(Do not put real billing info onto our satire site, we care about your security.)</i> </small></p>
 <%= form_for @current_cart, url: url_for(controller: 'orders', action: 'paid') do |f| %>
   <%= f.label :billing_email, "Email" %>
   <%= f.text_field :billing_email %>
