@@ -19,9 +19,6 @@ describe OrdersController do
       get cart_path
       must_respond_with :success
     end
-
-    it "gets the cart associated with current logged-in user" do
-    end
   end
 
   describe "show" do
@@ -230,6 +227,25 @@ describe OrdersController do
   end
 
   describe "destroy" do
+    let(:order) { orders(:order_one) }
+
+    it "successfully clears the cart of order_products, increases inventory of associated products, and redirects to cart path" do
+      proc { delete order_path(order.id) }.must_change "OrderProduct.count", -2
+
+      must_respond_with :redirect
+      must_redirect_to cart_path
+    end
+
+    it "succeeds if Order does not exist" do
+      id = order.id
+      order.order_products.each { |order_product| order_product.destroy }
+      order.destroy
+
+      proc { delete order_path(order.id) }.wont_change "OrderProduct.count"
+
+      must_respond_with :redirect
+      must_redirect_to cart_path
+    end
   end
 
   describe "enter_order" do
