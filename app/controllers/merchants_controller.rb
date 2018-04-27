@@ -82,4 +82,8 @@ class MerchantsController < ApplicationController
   def products_manager
     @products = @current_merchant.products
   end
+
+  def about_us
+  end
+  
 end

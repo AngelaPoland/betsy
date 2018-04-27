@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/merchant/order_fulfillment', to: 'merchants#order_fulfillment', as: 'order_fulfillment'
   get '/merchant/products_manager', to: 'merchants#products_manager', as: 'products_manager'
 
+  get '/merchant/about_us', to: 'merchants#about_us', as: 'about_us'
+
   get '/auth/failure', to: 'sessions#failure'
 
   resources :categories, only: [:new, :create] do
