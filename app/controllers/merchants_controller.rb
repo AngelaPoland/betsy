@@ -1,4 +1,7 @@
 class MerchantsController < ApplicationController
+
+  before_action :require_login
+  
   def account_page
     @total_net_revenue = []
 
