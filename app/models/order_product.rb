@@ -16,7 +16,7 @@ class OrderProduct < ApplicationRecord
    end
 
    def pending_order?
-       return self.status == "paid"
+      return self.status == "paid"
    end
 
 end
